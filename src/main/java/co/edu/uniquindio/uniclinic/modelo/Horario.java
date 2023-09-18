@@ -26,4 +26,8 @@ public class Horario implements Serializable {
 
     private LocalTime horaFin;
 
+    @ManyToOne
+    @JoinColumn(name = "medico_codigo")
+    private Medico medico;
+
 }

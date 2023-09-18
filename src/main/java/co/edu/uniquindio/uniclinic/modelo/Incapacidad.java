@@ -25,4 +25,8 @@ public class Incapacidad implements Serializable {
 
     private LocalDateTime fechaFin;
 
+    @OneToOne
+    @JoinColumn(name = "atencion_codigo")
+    private Atencion atencion;
+
 }

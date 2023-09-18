@@ -12,8 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Paciente implements Serializable {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+public class Paciente extends Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +30,8 @@ public class Paciente implements Serializable {
 
     @Enumerated(EnumType.ORDINAL)
     private TipoSangre tipoSangre;
+
+    @OneToMany(mappedBy = "paciente")
+    private List<Cita> citas;
 
 }

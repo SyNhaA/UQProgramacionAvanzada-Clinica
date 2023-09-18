@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,5 +28,12 @@ public class PQRS implements Serializable {
 
     @Enumerated(EnumType.ORDINAL)
     private EstadoPQRS estado;
+
+    @OneToMany(mappedBy = "pqrs")
+    private List<Mensaje> mensajes;
+
+    @ManyToOne
+    @JoinColumn(name = "cita_codigo")
+    private Cita cita;
 
 }

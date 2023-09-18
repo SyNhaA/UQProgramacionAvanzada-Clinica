@@ -23,4 +23,16 @@ public class Mensaje implements Serializable {
 
     private String mensaje;
 
+    @OneToOne
+    @JoinColumn(name = "mensaje_codigo")
+    private Mensaje respuesta;
+
+    @ManyToOne
+    @JoinColumn(name = "pqrs_codigo")
+    private PQRS pqrs;
+
+    @ManyToOne
+    @JoinColumn(name = "cuenta_codigo")
+    private Cuenta cuenta;
+
 }

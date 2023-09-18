@@ -3,8 +3,10 @@ package co.edu.uniquindio.uniclinic.modelo;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,5 +23,8 @@ public class Cuenta implements Serializable {
     private String correo;
 
     private String contrasenia;
+
+    @OneToMany(mappedBy = "cuenta")
+    private List<Mensaje> mensajes;
 
 }

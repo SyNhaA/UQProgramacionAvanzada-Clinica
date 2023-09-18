@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,5 +28,19 @@ public class Cita implements Serializable {
 
     @Enumerated(EnumType.ORDINAL)
     private EstadoCita estado;
+
+    @OneToOne(mappedBy = "cita")
+    private Atencion atencion;
+
+    @OneToMany(mappedBy = "cita")
+    private List<PQRS> pqrs;
+
+    @ManyToOne
+    @JoinColumn(name = "paciente_codigo")
+    private Paciente paciente;
+
+    @ManyToOne
+    @JoinColumn(name = "medico_codigo")
+    private Medico medico;
 
 }

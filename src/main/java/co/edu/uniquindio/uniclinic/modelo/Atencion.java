@@ -24,4 +24,14 @@ public class Atencion implements Serializable {
 
     private String notas;
 
+    @OneToOne
+    @JoinColumn(name = "cita_codigo")
+    private Cita cita;
+
+    @OneToOne(mappedBy = "atencion")
+    private Incapacidad incapacidad;
+
+    @OneToOne(mappedBy = "atencion")
+    private RecetaMedica recetaMedica;
+
 }
