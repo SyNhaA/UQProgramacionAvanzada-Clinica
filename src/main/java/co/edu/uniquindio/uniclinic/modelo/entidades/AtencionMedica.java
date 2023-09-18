@@ -1,4 +1,4 @@
-package co.edu.uniquindio.uniclinic.modelo;
+package co.edu.uniquindio.uniclinic.modelo.entidades;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,17 +8,16 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Atencion implements Serializable {
+public class AtencionMedica implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
 
-    private String diagnosito;
+    private String diagnostico;
 
     private String tratamiento;
 
@@ -28,10 +27,10 @@ public class Atencion implements Serializable {
     @JoinColumn(name = "cita_codigo")
     private Cita cita;
 
-    @OneToOne(mappedBy = "atencion")
+    @OneToOne(mappedBy = "atencionMedica")
     private Incapacidad incapacidad;
 
-    @OneToOne(mappedBy = "atencion")
+    @OneToOne(mappedBy = "atencionMedica")
     private RecetaMedica recetaMedica;
 
 }

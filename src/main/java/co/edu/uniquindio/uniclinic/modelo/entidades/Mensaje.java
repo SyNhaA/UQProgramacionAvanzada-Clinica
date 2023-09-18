@@ -1,19 +1,17 @@
-package co.edu.uniquindio.uniclinic.modelo;
+package co.edu.uniquindio.uniclinic.modelo.entidades;
 
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class PQRS implements Serializable {
+public class Mensaje implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,18 +20,18 @@ public class PQRS implements Serializable {
 
     private LocalDateTime fechaCreacion;
 
-    private String tipo;
+    private String mensaje;
 
-    private String motivo;
-
-    @Enumerated(EnumType.ORDINAL)
-    private EstadoPQRS estado;
-
-    @OneToMany(mappedBy = "pqrs")
-    private List<Mensaje> mensajes;
+    @OneToOne
+    @JoinColumn(name = "respuesta_codigo")
+    private Mensaje respuesta;
 
     @ManyToOne
-    @JoinColumn(name = "cita_codigo")
-    private Cita cita;
+    @JoinColumn(name = "pqrs_codigo")
+    private Pqrs pqrs;
+
+    @ManyToOne
+    @JoinColumn(name = "cuenta_codigo")
+    private Cuenta cuenta;
 
 }

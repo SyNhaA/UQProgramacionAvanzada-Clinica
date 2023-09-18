@@ -1,4 +1,4 @@
-package co.edu.uniquindio.uniclinic.modelo;
+package co.edu.uniquindio.uniclinic.modelo.entidades;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Medicamento implements Serializable {

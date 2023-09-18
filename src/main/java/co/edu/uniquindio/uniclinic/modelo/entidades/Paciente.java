@@ -1,5 +1,7 @@
-package co.edu.uniquindio.uniclinic.modelo;
+package co.edu.uniquindio.uniclinic.modelo.entidades;
 
+import co.edu.uniquindio.uniclinic.modelo.enums.EPS;
+import co.edu.uniquindio.uniclinic.modelo.enums.TipoSangre;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
@@ -10,15 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Paciente extends Usuario implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private int codigo;
 
     private LocalDateTime fechaNacimiento;
 
@@ -28,7 +22,7 @@ public class Paciente extends Usuario implements Serializable {
     @Enumerated(EnumType.STRING)
     private EPS eps;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private TipoSangre tipoSangre;
 
     @OneToMany(mappedBy = "paciente")

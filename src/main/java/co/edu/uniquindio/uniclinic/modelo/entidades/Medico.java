@@ -1,5 +1,6 @@
-package co.edu.uniquindio.uniclinic.modelo;
+package co.edu.uniquindio.uniclinic.modelo.entidades;
 
+import co.edu.uniquindio.uniclinic.modelo.enums.Especialidad;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
@@ -9,15 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Medico extends Usuario implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
-    private int codigo;
 
     @Enumerated(EnumType.STRING)
     private Especialidad especialidad;
@@ -26,7 +19,7 @@ public class Medico extends Usuario implements Serializable {
     private List<Cita> citas;
 
     @OneToMany(mappedBy = "medico")
-    private List<Horario> horarios;
+    private List<HorarioMedico> horarios;
 
     @OneToMany(mappedBy = "medico")
     private List<DiaLibre> diasLibres;

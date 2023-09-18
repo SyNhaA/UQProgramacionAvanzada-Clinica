@@ -1,4 +1,4 @@
-package co.edu.uniquindio.uniclinic.modelo;
+package co.edu.uniquindio.uniclinic.modelo.entidades;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,23 +9,21 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
+@Inheritance(strategy = InheritanceType.JOINED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class RecetaMedica implements Serializable {
+public class Cuenta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int codigo;
 
-    private String descripcion;
+    private String correo;
 
-    @OneToOne
-    @JoinColumn(name = "atencion_codigo")
-    private Atencion atencion;
+    private String contrasenia;
 
-    @ManyToMany(mappedBy = "recetasMedicas")
-    private List<Medicamento> medicamentos;
+    @OneToMany(mappedBy = "cuenta")
+    private List<Mensaje> mensajes;
 
 }

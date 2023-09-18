@@ -1,5 +1,6 @@
-package co.edu.uniquindio.uniclinic.modelo;
+package co.edu.uniquindio.uniclinic.modelo.entidades;
 
+import co.edu.uniquindio.uniclinic.modelo.enums.EstadoCita;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
@@ -10,7 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Cita implements Serializable {
@@ -26,14 +26,14 @@ public class Cita implements Serializable {
 
     private String motivo;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private EstadoCita estado;
 
     @OneToOne(mappedBy = "cita")
-    private Atencion atencion;
+    private AtencionMedica atencionMedica;
 
     @OneToMany(mappedBy = "cita")
-    private List<PQRS> pqrs;
+    private List<Pqrs> pqrs;
 
     @ManyToOne
     @JoinColumn(name = "paciente_codigo")
