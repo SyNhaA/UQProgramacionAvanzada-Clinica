@@ -23,9 +23,6 @@ public class Pqrs implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaCreacion;
 
-    @Column(nullable = false, length = 50)
-    private String tipo;
-
     @Column(nullable = false, length = 500)
     private String motivo;
 

@@ -5,7 +5,8 @@ import co.edu.uniquindio.uniclinic.modelo.enums.Especialidad;
 
 import java.util.List;
 
-public record MedicoDTO(
+public record InfoMedicoDTO(
+        int codigo,
         String cedula,
         String nombre,
         String telefono,
