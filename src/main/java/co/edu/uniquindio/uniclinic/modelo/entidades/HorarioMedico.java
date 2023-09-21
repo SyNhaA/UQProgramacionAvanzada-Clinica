@@ -19,14 +19,17 @@ public class HorarioMedico implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
+    @Column(nullable = false)
     private LocalDate dia;
 
+    @Column(nullable = false)
     private LocalTime horaInicio;
 
+    @Column(nullable = false)
     private LocalTime horaFin;
 
     @ManyToOne
-    @JoinColumn(name = "medico_codigo")
+    @JoinColumn(name = "medico_codigo", nullable = false)
     private Medico medico;
 
 }

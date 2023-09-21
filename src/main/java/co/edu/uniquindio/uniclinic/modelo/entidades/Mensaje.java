@@ -18,20 +18,22 @@ public class Mensaje implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
+    @Column(nullable = false)
     private LocalDateTime fechaCreacion;
 
+    @Column(nullable = false, length = 500)
     private String mensaje;
 
     @OneToOne
-    @JoinColumn(name = "respuesta_codigo")
+    @JoinColumn(name = "respuesta_codigo", nullable = false)
     private Mensaje respuesta;
 
     @ManyToOne
-    @JoinColumn(name = "pqrs_codigo")
+    @JoinColumn(name = "pqrs_codigo", nullable = false)
     private Pqrs pqrs;
 
     @ManyToOne
-    @JoinColumn(name = "cuenta_codigo")
+    @JoinColumn(name = "cuenta_codigo", nullable = false)
     private Cuenta cuenta;
 
 }

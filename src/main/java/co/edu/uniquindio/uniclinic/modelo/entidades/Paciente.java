@@ -14,15 +14,18 @@ import java.util.List;
 @NoArgsConstructor
 public class Paciente extends Usuario implements Serializable {
 
+    @Column(nullable = false)
     private LocalDateTime fechaNacimiento;
 
     @ElementCollection
     private List<String> alergias;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private EPS eps;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoSangre tipoSangre;
 
     @OneToMany(mappedBy = "paciente")

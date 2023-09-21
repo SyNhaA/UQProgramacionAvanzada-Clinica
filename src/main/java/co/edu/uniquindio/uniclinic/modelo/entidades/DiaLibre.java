@@ -1,6 +1,7 @@
 package co.edu.uniquindio.uniclinic.modelo.entidades;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
 import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -18,10 +19,12 @@ public class DiaLibre implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
+    @Future
+    @Column(nullable = false)
     private LocalDate dia;
 
     @ManyToOne
-    @JoinColumn(name = "medico_codigo")
+    @JoinColumn(name = "medico_codigo", nullable = false)
     private Medico medico;
 
 }

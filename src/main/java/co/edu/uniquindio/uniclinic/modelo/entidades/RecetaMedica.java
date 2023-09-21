@@ -18,10 +18,11 @@ public class RecetaMedica implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
+    @Column(length = 250)
     private String descripcion;
 
     @OneToOne
-    @JoinColumn(name = "atencion_codigo")
+    @JoinColumn(name = "atencion_codigo", nullable = false)
     private AtencionMedica atencionMedica;
 
     @ManyToMany(mappedBy = "recetasMedicas")

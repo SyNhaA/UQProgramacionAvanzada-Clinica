@@ -17,14 +17,17 @@ public class AtencionMedica implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
+    @Column(nullable = false, length = 300)
     private String diagnostico;
 
+    @Column(nullable = false, length = 300)
     private String tratamiento;
 
+    @Column(length = 300)
     private String notas;
 
     @OneToOne
-    @JoinColumn(name = "cita_codigo")
+    @JoinColumn(name = "cita_codigo", nullable = false)
     private Cita cita;
 
     @OneToOne(mappedBy = "atencionMedica")

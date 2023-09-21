@@ -20,20 +20,24 @@ public class Pqrs implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
+    @Column(nullable = false)
     private LocalDateTime fechaCreacion;
 
+    @Column(nullable = false, length = 50)
     private String tipo;
 
+    @Column(nullable = false, length = 500)
     private String motivo;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private EstadoPQRS estado;
 
     @OneToMany(mappedBy = "pqrs")
     private List<Mensaje> mensajes;
 
     @ManyToOne
-    @JoinColumn(name = "cita_codigo")
+    @JoinColumn(name = "cita_codigo", nullable = false)
     private Cita cita;
 
 }

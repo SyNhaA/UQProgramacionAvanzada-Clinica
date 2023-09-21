@@ -13,6 +13,7 @@ import java.util.List;
 public class Medico extends Usuario implements Serializable {
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Especialidad especialidad;
 
     @OneToMany(mappedBy = "medico")
