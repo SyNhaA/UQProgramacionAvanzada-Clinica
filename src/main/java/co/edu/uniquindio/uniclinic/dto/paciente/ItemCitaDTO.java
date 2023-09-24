@@ -1,10 +1,10 @@
-package co.edu.uniquindio.uniclinic.dto;
+package co.edu.uniquindio.uniclinic.dto.paciente;
 
 import co.edu.uniquindio.uniclinic.modelo.enums.EstadoCita;
 
 import java.time.LocalDateTime;
 
-public record CitaDTOAdmin(
+public record ItemCitaDTO(
         int codigo,
         String nombrePaciente,
         String nombreMedico,

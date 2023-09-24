@@ -1,27 +1,25 @@
 package co.edu.uniquindio.uniclinic.servicios.interfaces;
 
-import co.edu.uniquindio.uniclinic.dto.*;
+import co.edu.uniquindio.uniclinic.dto.admin.*;
+import co.edu.uniquindio.uniclinic.dto.paciente.DetallePQRSDTO;
+import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
+import co.edu.uniquindio.uniclinic.dto.paciente.ItemPQRSDTO;
+import co.edu.uniquindio.uniclinic.dto.paciente.RegistroRespuestaDTO;
 
 import java.util.List;
 
 public interface AdministradorServicio {
 
-    String crearMedico(MedicoDTO medico) throws Exception;
+    int crearMedico(RegistroMedicoDTO medico) throws Exception;
 
-    String actualizarMedico(int codigo, MedicoDTO medico) throws Exception;
+    int actualizarMedico(int codigo, RegistroMedicoDTO medico) throws Exception;
 
-    String eliminarMedico(int codigo) throws Exception;
+    void eliminarMedico(int codigo) throws Exception;
 
-    List<MedicoDTOAdmin> listarMedicos() throws Exception;
+    List<ItemMedicoDTO> listarMedicos() throws Exception;
 
-    InfoMedicoDTO obtenerMedico(int codigo) throws Exception;
+    DetalleMedicoDTO obtenerMedico(int codigo) throws Exception;
 
-    List<PQRSDTOAdmin> listarPQRS() throws Exception;
-
-    String responderPQRS(int codigo) throws Exception;
-
-    InfoPQRSDTO verDetallePQRS(int codigo) throws Exception;
-
-    List<CitaDTOAdmin> listarCitas() throws Exception;
+    List<ItemCitaDTO> listarCitas() throws Exception;
 
 }

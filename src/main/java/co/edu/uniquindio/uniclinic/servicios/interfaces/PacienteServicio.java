@@ -1,31 +1,27 @@
 package co.edu.uniquindio.uniclinic.servicios.interfaces;
 
+import co.edu.uniquindio.uniclinic.dto.paciente.*;
+
+import java.util.List;
+
 public interface PacienteServicio {
 
-    void registrarse();
+    int registrarse(RegistroPacienteDTO registroPacienteDTO) throws Exception;
 
-    void editarPerfil();
+    int editarPerfil(int codigoPaciente, RegistroPacienteDTO registroPacienteDTO) throws Exception;
 
-    void eliminarCuenta();
+    void eliminarCuenta(int codigoPaciente) throws Exception;
 
-    void enviarLinkRecuperacion();
+    DetallePacienteDTO verDetallePaciente(int codigoPaciente) throws Exception;
 
-    void cambiarPassword();
+    int agendarCita(RegistroCitaDTO registroCitaDTO) throws Exception;
 
-    void agendarCita();
+    int crearPQRS(RegistroPQRSDTO registroPQRSDTO) throws Exception;
 
-    void crearPQRS();
+    List<ItemCitaDTO> listarCitasPaciente(int codigoPaciente) throws Exception;
 
-    void listarPQRSPaciente();
+    void filtrarCitas(FiltroBusquedaCitaDTO filtroBusquedaCitaDTO) throws Exception;
 
-    void responderPQRS();
-
-    void listarCitasPaciente();
-
-    void filtrarCitasPorFecha();
-
-    void filtrarCitasPorMedico();
-
-    void verDetalleCita();
+    DetalleAtencionMedicaDTO verDetalleCita(int codigoCita) throws Exception;
 
 }
