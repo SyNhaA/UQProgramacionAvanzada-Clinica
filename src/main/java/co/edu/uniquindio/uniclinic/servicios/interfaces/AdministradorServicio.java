@@ -12,7 +12,7 @@ public interface AdministradorServicio {
 
     int crearMedico(RegistroMedicoDTO medico) throws Exception;
 
-    int actualizarMedico(int codigo, RegistroMedicoDTO medico) throws Exception;
+    int actualizarMedico(DetalleMedicoDTO medico) throws Exception;
 
     void eliminarMedico(int codigo) throws Exception;
 

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.uniclinic.modelo.entidades;
 
 import co.edu.uniquindio.uniclinic.modelo.enums.Ciudad;
+import co.edu.uniquindio.uniclinic.modelo.enums.EstadoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
@@ -27,5 +28,7 @@ public class Usuario extends Cuenta implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Ciudad ciudad;
+
+    private EstadoUsuario estado;
 
 }
