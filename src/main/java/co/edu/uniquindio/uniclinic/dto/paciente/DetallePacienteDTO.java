@@ -16,7 +16,6 @@ public record DetallePacienteDTO(
         Ciudad ciudad,
         EPS eps,
         TipoSangre tipoSangre,
-        String contrasenia,
         String urlFoto,
         LocalDateTime fechaNacimiento,
         List<String> alergias

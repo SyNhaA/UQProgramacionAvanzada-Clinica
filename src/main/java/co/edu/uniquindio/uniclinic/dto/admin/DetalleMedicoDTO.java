@@ -14,7 +14,6 @@ public record DetalleMedicoDTO(
         String telefono,
         Ciudad ciudad,
         Especialidad especialidad,
-        String contrasenia,
         String urlFoto,
         List<HorarioDTO> horarios
 ) {

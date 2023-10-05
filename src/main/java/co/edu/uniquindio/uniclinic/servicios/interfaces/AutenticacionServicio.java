@@ -5,7 +5,7 @@ import co.edu.uniquindio.uniclinic.dto.autenticacion.NuevaPasswordDTO;
 
 public interface AutenticacionServicio {
 
-    void login(LoginDTO loginDTO) throws Exception;
+    String login(LoginDTO loginDTO) throws Exception;
 
     void enviarLinkRecuperacion(String correo) throws Exception;
 

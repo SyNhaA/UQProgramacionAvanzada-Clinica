@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import lombok.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -24,11 +24,11 @@ public class Incapacidad implements Serializable {
 
     @Future
     @Column(nullable = false)
-    private LocalDateTime fechaInicio;
+    private LocalDate fechaInicio;
 
     @Future
     @Column(nullable = false)
-    private LocalDateTime fechaFin;
+    private LocalDate fechaFin;
 
     @OneToOne
     @JoinColumn(name = "atencion_codigo", nullable = false)

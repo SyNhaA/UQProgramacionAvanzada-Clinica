@@ -4,7 +4,7 @@ import co.edu.uniquindio.uniclinic.modelo.enums.Ciudad;
 import co.edu.uniquindio.uniclinic.modelo.enums.EPS;
 import co.edu.uniquindio.uniclinic.modelo.enums.TipoSangre;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public record RegistroPacienteDTO(
@@ -17,7 +17,7 @@ public record RegistroPacienteDTO(
         TipoSangre tipoSangre,
         String contrasenia,
         String urlFoto,
-        LocalDateTime fechaNacimiento,
+        LocalDate fechaNacimiento,
         List<String> alergias
 ) {
 }

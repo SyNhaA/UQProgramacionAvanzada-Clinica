@@ -4,7 +4,6 @@ import co.edu.uniquindio.uniclinic.dto.admin.DetalleMedicoDTO;
 import co.edu.uniquindio.uniclinic.dto.admin.ItemConsultaDTO;
 import co.edu.uniquindio.uniclinic.dto.admin.ItemMedicoDTO;
 import co.edu.uniquindio.uniclinic.dto.admin.RegistroMedicoDTO;
-import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
 import co.edu.uniquindio.uniclinic.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.uniclinic.repositorios.MedicoRepo;

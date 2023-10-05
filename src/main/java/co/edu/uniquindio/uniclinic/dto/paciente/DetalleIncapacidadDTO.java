@@ -1,11 +1,11 @@
 package co.edu.uniquindio.uniclinic.dto.paciente;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record DetalleIncapacidadDTO(
         int codigoCita,
         String diagnostico,
-        LocalDateTime fechaInicio,
-        LocalDateTime fechaFin
+        LocalDate fechaInicio,
+        LocalDate fechaFin
 ) {
 }

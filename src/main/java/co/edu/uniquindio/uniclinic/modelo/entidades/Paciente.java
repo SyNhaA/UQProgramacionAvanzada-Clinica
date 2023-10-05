@@ -5,7 +5,7 @@ import co.edu.uniquindio.uniclinic.modelo.enums.TipoSangre;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -15,7 +15,7 @@ import java.util.List;
 public class Paciente extends Usuario implements Serializable {
 
     @Column(nullable = false)
-    private LocalDateTime fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     @ElementCollection
     private List<String> alergias;
