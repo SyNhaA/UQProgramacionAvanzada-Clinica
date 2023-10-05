@@ -9,5 +9,4 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 public class Administrador extends Cuenta implements Serializable {
-
 }

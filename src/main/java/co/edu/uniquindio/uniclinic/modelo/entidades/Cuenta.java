@@ -22,7 +22,7 @@ public class Cuenta implements Serializable {
     private int codigo;
 
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
-            flags = Pattern.Flag.CASE_INSENSITIVE, message = "El correo no es válido")
+            flags = Pattern.Flag.CASE_INSENSITIVE)
     @Column(nullable = false, length = 50, unique = true)
     private String correo;
 
