@@ -1,4 +1,4 @@
-package co.edu.uniquindio.uniclinic.dto.paciente;
+package co.edu.uniquindio.uniclinic.dto.email;
 
 public record EmailDTO(
         String remitente,

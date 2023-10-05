@@ -1,6 +1,7 @@
 package co.edu.uniquindio.uniclinic.servicios.implementaciones;
 
 import co.edu.uniquindio.uniclinic.dto.admin.DetalleMedicoDTO;
+import co.edu.uniquindio.uniclinic.dto.admin.ItemConsultaDTO;
 import co.edu.uniquindio.uniclinic.dto.admin.ItemMedicoDTO;
 import co.edu.uniquindio.uniclinic.dto.admin.RegistroMedicoDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
@@ -88,9 +89,8 @@ public class AdministradorServicioImpl implements AdministradorServicio {
     }
 
     @Override
-    public List<ItemCitaDTO> listarCitas() throws Exception {
+    public List<ItemConsultaDTO> listarCitas() throws Exception {
         return null;
     }
-
 
 }

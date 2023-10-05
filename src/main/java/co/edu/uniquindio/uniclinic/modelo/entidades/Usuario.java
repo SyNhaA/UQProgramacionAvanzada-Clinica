@@ -29,6 +29,7 @@ public class Usuario extends Cuenta implements Serializable {
     @Column(nullable = false)
     private Ciudad ciudad;
 
+    @Column(nullable = false)
     private EstadoUsuario estado;
 
 }

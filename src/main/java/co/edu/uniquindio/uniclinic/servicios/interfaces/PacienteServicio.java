@@ -6,22 +6,24 @@ import java.util.List;
 
 public interface PacienteServicio {
 
-    int registrarse(RegistroPacienteDTO registroPacienteDTO) throws Exception;
+    int registrarse(RegistroPacienteDTO pacienteDTO) throws Exception;
 
-    int editarPerfil(int codigoPaciente, RegistroPacienteDTO registroPacienteDTO) throws Exception;
+    int editarPerfil(DetallePacienteDTO detallePacienteDTO) throws Exception;
 
-    void eliminarCuenta(int codigoPaciente) throws Exception;
+    void eliminarCuenta(int codigo) throws Exception;
 
-    DetallePacienteDTO verDetallePaciente(int codigoPaciente) throws Exception;
+    DetallePacienteDTO verDetallePaciente(int codigo) throws Exception;
 
     int agendarCita(RegistroCitaDTO registroCitaDTO) throws Exception;
-
-    int crearPQRS(RegistroPQRSDTO registroPQRSDTO) throws Exception;
 
     List<ItemCitaDTO> listarCitasPaciente(int codigoPaciente) throws Exception;
 
     void filtrarCitas(FiltroBusquedaCitaDTO filtroBusquedaCitaDTO) throws Exception;
 
     DetalleAtencionMedicaDTO verDetalleCita(int codigoCita) throws Exception;
+
+    DetalleRecetaDTO verDetalleRecetaMedica(int codigoReceta) throws Exception;
+
+    DetalleIncapacidadDTO verDetalleIncapacidad(int codigoIncapacidad) throws Exception;
 
 }

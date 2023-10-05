@@ -1,13 +1,13 @@
-package co.edu.uniquindio.uniclinic.dto.paciente;
+package co.edu.uniquindio.uniclinic.dto.pqrs;
 
 import co.edu.uniquindio.uniclinic.modelo.enums.EstadoPQRS;
 
 import java.time.LocalDateTime;
 
-public record ItemPQRSDTO(
+public record ItemPQRSPacienteDTO(
         int codigo,
         EstadoPQRS estado,
-        LocalDateTime fecha,
-        String nombrePaciente
+        String respuesta,
+        LocalDateTime fecha
 ) {
 }

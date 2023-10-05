@@ -26,11 +26,11 @@ public class Medicamento implements Serializable {
     @Column(nullable = false)
     private int cantidad;
 
-    @Column(length = 150)
-    private String descripcion;
+    @Column(nullable = false, length = 40)
+    private String viaAdministracion;
 
-    @Column(nullable = false, length = 150)
-    private String instrucciones;
+    @Column(nullable = false, length = 60)
+    private String dosis;
 
     @ManyToMany
     @JoinTable(name = "medicamento_receta",

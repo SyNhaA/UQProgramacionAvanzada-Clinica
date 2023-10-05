@@ -1,5 +1,6 @@
 package co.edu.uniquindio.uniclinic.servicios.interfaces;
 
+import co.edu.uniquindio.uniclinic.dto.admin.ItemConsultaDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
 import co.edu.uniquindio.uniclinic.dto.medico.*;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface MedicoServicio {
 
-    List<ItemCitaDTO> listarCitasPendientes(int codigoMedico) throws Exception;
+    List<ItemConsultaDTO> listarCitasPendientes(int codigoMedico) throws Exception;
 
     int atenderCita(RegistroAtencionDTO registroAtencionDTO) throws Exception;
 
@@ -15,6 +16,6 @@ public interface MedicoServicio {
 
     int agendarDiaLibre(DiaLibreDTO diaLibreDTO) throws Exception;
 
-    List<ItemCitaDTO> listarCitasRealizadasMedico(int codigoMedico) throws Exception;
+    List<ItemConsultaDTO> listarCitasRealizadasMedico(int codigoMedico) throws Exception;
 
 }

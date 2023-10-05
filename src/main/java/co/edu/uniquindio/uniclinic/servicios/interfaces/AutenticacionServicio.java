@@ -1,7 +1,7 @@
 package co.edu.uniquindio.uniclinic.servicios.interfaces;
 
-import co.edu.uniquindio.uniclinic.dto.paciente.LoginDTO;
-import co.edu.uniquindio.uniclinic.dto.paciente.NuevaPasswordDTO;
+import co.edu.uniquindio.uniclinic.dto.autenticacion.LoginDTO;
+import co.edu.uniquindio.uniclinic.dto.autenticacion.NuevaPasswordDTO;
 
 public interface AutenticacionServicio {
 

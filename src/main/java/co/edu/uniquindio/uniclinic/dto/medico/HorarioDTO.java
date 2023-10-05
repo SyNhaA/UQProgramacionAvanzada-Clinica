@@ -1,4 +1,4 @@
-package co.edu.uniquindio.uniclinic.dto.paciente;
+package co.edu.uniquindio.uniclinic.dto.medico;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

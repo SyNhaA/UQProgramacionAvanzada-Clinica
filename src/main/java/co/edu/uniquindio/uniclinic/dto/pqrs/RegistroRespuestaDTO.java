@@ -1,4 +1,4 @@
-package co.edu.uniquindio.uniclinic.dto.paciente;
+package co.edu.uniquindio.uniclinic.dto.pqrs;
 
 public record RegistroRespuestaDTO(
         int codigoPQRS,
