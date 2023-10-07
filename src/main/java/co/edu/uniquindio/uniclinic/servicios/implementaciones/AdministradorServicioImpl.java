@@ -20,14 +20,12 @@ import java.util.Optional;
 public class AdministradorServicioImpl implements AdministradorServicio {
 
     private final MedicoRepo medicoRepo;
-
     private final PQRSRepo pqrsRepo;
 
     @Override
     public int crearMedico(RegistroMedicoDTO medicoDTO) throws Exception {
         return 0;
     }
-
 
     @Override
     public int actualizarMedico(DetalleMedicoDTO medicoDTO) throws Exception {
