@@ -1,11 +1,13 @@
 package co.edu.uniquindio.uniclinic.servicios.interfaces;
 
-import java.io.File;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 public interface ImagenesServicio {
 
-    String subirImagen(File imagen) throws Exception;
+    Map subirImagen(MultipartFile imagen) throws Exception;
 
-    void eliminarImagen(String nombre) throws Exception;
+    Map eliminarImagen(String idImagen) throws Exception;
 
 }
