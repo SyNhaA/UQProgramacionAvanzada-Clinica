@@ -23,10 +23,10 @@ public class Cuenta implements Serializable {
 
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
             flags = Pattern.Flag.CASE_INSENSITIVE)
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 80, unique = true)
     private String correo;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 80)
     private String contrasenia;
 
     @OneToMany(mappedBy = "cuenta")

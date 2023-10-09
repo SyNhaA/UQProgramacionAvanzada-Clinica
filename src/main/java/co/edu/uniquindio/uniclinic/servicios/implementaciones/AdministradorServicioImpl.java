@@ -39,7 +39,7 @@ public class AdministradorServicioImpl implements AdministradorServicio {
         medico.setCedula(medicoDTO.cedula() );
         medico.setTelefono(medicoDTO.telefono());
         medico.setNombre(medicoDTO.nombre() );
-        medico.setEspecialidad( medicoDTO.especialidad() );
+        medico.setEspecialidad(medicoDTO.especialidad());
         medico.setCiudad(medicoDTO.ciudad());
         medico.setCorreo(medicoDTO.correo() );
         medico.setContrasenia(medicoDTO.contrasenia());
@@ -47,8 +47,7 @@ public class AdministradorServicioImpl implements AdministradorServicio {
         medico.setEstado(EstadoUsuario.ACTIVO);
 
         Medico medicoNuevo = medicoRepo.save(medico);
-
-        asignarHorariosMedico( medicoNuevo, medicoDTO.horarios() );
+        asignarHorariosMedico(medicoNuevo, medicoDTO.horarios());
 
         return medicoNuevo.getCodigo();
     }
@@ -86,7 +85,7 @@ public class AdministradorServicioImpl implements AdministradorServicio {
         buscado.setCedula(medicoDTO.cedula() );
         buscado.setTelefono(medicoDTO.telefono());
         buscado.setNombre(medicoDTO.nombre() );
-        buscado.setEspecialidad( medicoDTO.especialidad() );
+        buscado.setEspecialidad(medicoDTO.especialidad());
         buscado.setCiudad(medicoDTO.ciudad());
         buscado.setCorreo(medicoDTO.correo() );
         buscado.setUrlFoto(medicoDTO.urlFoto());

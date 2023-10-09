@@ -1,9 +1,9 @@
 package co.edu.uniquindio.uniclinic.modelo.entidades;
 
+import co.edu.uniquindio.uniclinic.modelo.enums.Dia;
 import jakarta.persistence.*;
 import lombok.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
@@ -19,8 +19,9 @@ public class HorarioMedico implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private LocalDate dia;
+    private Dia dia;
 
     @Column(nullable = false)
     private LocalTime horaInicio;

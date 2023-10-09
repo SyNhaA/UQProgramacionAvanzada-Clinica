@@ -70,7 +70,7 @@ public class PQRSServicioImpl implements PQRSServicio {
     public DetallePQRSDTO verDetallePQRS(int codigoPQRS) throws Exception {
         Optional<Pqrs> opcional = pqrsRepo.findById(codigoPQRS);
 
-        if(opcional.isEmpty()){
+        if(opcional.isEmpty()) {
             throw new Exception("No existe un PQRS con el código "+codigoPQRS);
         }
 
@@ -102,21 +102,28 @@ public class PQRSServicioImpl implements PQRSServicio {
     public int responderPQRS(RegistroRespuestaDTO registroRespuestaDTO) throws Exception {
         Optional<Pqrs> opcionalPQRS = pqrsRepo.findById(registroRespuestaDTO.codigoPQRS());
 
-        if(opcionalPQRS.isEmpty()){
+        if(opcionalPQRS.isEmpty()) {
             throw new Exception("No existe un PQRS con el código "+registroRespuestaDTO.codigoPQRS());
         }
 
         Optional<Cuenta> opcionalCuenta = cuentaRepo.findById(registroRespuestaDTO.codigoCuenta());
 
-        if(opcionalCuenta.isEmpty()){
+        if(opcionalCuenta.isEmpty()) {
             throw new Exception("No existe una cuenta con el código "+registroRespuestaDTO.codigoCuenta());
+        }
+
+        Optional<Mensaje> opcionalMensaje = mensajeRepo.findById(registroRespuestaDTO.codigoMensaje());
+
+        if(opcionalMensaje.isEmpty()) {
+            throw new Exception("No existe un mensaje con el código "+registroRespuestaDTO.codigoMensaje());
         }
 
         Mensaje mensajeNuevo = new Mensaje();
         mensajeNuevo.setPqrs(opcionalPQRS.get());
         mensajeNuevo.setFechaCreacion(LocalDateTime.now());
         mensajeNuevo.setCuenta(opcionalCuenta.get());
-        mensajeNuevo.setMensaje(registroRespuestaDTO.mensaje() );
+        mensajeNuevo.setMensaje(registroRespuestaDTO.mensaje());
+        mensajeNuevo.setMensajePadre(opcionalMensaje.get());
 
         Mensaje respuesta = mensajeRepo.save(mensajeNuevo);
 

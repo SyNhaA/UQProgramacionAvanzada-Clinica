@@ -25,8 +25,8 @@ public class Mensaje implements Serializable {
     private String mensaje;
 
     @OneToOne
-    @JoinColumn(name = "respuesta_codigo", nullable = false)
-    private Mensaje respuesta;
+    @JoinColumn(name = "msjpadre_codigo", nullable = false)
+    private Mensaje mensajePadre;
 
     @ManyToOne
     @JoinColumn(name = "pqrs_codigo", nullable = false)
