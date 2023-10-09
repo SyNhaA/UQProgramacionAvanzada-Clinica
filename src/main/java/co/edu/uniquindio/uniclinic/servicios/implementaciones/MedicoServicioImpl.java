@@ -37,13 +37,14 @@ public class MedicoServicioImpl implements MedicoServicio {
         }
 
         List<ItemConsultaDTO> listaItemConsultaDTOS = new ArrayList<>();
-        for (Cita cita : medicoRepo.listarCitasPendiente(codigoMedico)) {
+        for (Cita c : medicoRepo.listarCitasPendiente(codigoMedico)) {
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
-                    cita.getMedico().getCodigo(),
-                    cita.getPaciente().getNombre(),
-                    cita.getFechaCita(),
-                    cita.getMotivo(),
-                    cita.getEstado()
+                    c.getMedico().getCodigo(),
+                    c.getPaciente().getCedula(),
+                    c.getPaciente().getNombre(),
+                    c.getFechaCita(),
+                    c.getMotivo(),
+                    c.getEstado()
             );
             listaItemConsultaDTOS.add(itemConsultaDTO);
         }
@@ -65,13 +66,14 @@ public class MedicoServicioImpl implements MedicoServicio {
         }
 
         List<ItemCitaDTO> listaItemCitaDTO = new ArrayList<>();
-        for (Cita cita : pacienteRepo.listarHistorialAtencionesPaciente(codigoPaciente)) {
+        for (Cita c : pacienteRepo.listarHistorialAtencionesPaciente(codigoPaciente)) {
             ItemCitaDTO itemCitaDTO = new ItemCitaDTO(
-                    cita.getCodigo(),
-                    cita.getMedico().getNombre(),
-                    cita.getFechaCita(),
-                    cita.getMotivo(),
-                    cita.getEstado()
+                    c.getCodigo(),
+                    c.getMedico().getNombre(),
+                    c.getMedico().getEspecialidad(),
+                    c.getFechaCita(),
+                    c.getMotivo(),
+                    c.getEstado()
             );
             listaItemCitaDTO.add(itemCitaDTO);
         }
@@ -117,13 +119,14 @@ public class MedicoServicioImpl implements MedicoServicio {
         List<ItemConsultaDTO> listItemConsultaDTO = new ArrayList<>();
 
         ArrayList<ItemConsultaDTO> listaCitasMedico = new ArrayList<>();
-        for (Cita cita : medicoRepo.listasCitas(codigoMedico)) {
+        for (Cita c : medicoRepo.listasCitas(codigoMedico)) {
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
-                    cita.getMedico().getCodigo(),
-                    cita.getPaciente().getNombre(),
-                    cita.getFechaCita(),
-                    cita.getMotivo(),
-                    cita.getEstado()
+                    c.getMedico().getCodigo(),
+                    c.getPaciente().getCedula(),
+                    c.getPaciente().getNombre(),
+                    c.getFechaCita(),
+                    c.getMotivo(),
+                    c.getEstado()
             );
             listaCitasMedico.add(itemConsultaDTO);
         }

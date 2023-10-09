@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 public record ItemConsultaDTO(
         int codigo,
+        String cedulaPaciente,
         String nombrePaciente,
         LocalDateTime fechaConsulta,
         String motivo,
