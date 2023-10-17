@@ -24,11 +24,10 @@ public class Cita implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fechaCreacion;
 
-    @Future
     @Column(nullable = false)
     private LocalDateTime fechaCita;
 
-    @Column(nullable = false, length = 150)
+    @Column(nullable = false, length = 250)
     private String motivo;
 
     @Enumerated(EnumType.STRING)

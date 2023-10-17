@@ -22,11 +22,9 @@ public class Incapacidad implements Serializable {
     @Column(nullable = false, length = 200)
     private String motivo;
 
-    @Future
     @Column(nullable = false)
     private LocalDate fechaInicio;
 
-    @Future
     @Column(nullable = false)
     private LocalDate fechaFin;
 

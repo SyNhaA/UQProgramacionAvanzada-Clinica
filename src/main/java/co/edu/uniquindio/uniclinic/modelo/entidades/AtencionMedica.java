@@ -17,13 +17,13 @@ public class AtencionMedica implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
-    @Column(nullable = false, length = 300)
+    @Column(nullable = false, length = 350)
     private String diagnostico;
 
-    @Column(nullable = false, length = 300)
+    @Column(nullable = false, length = 350)
     private String tratamiento;
 
-    @Column(length = 300)
+    @Column(length = 500)
     private String notas;
 
     @OneToOne

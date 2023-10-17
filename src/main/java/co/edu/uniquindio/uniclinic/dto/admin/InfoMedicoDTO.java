@@ -8,7 +8,10 @@ import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
-public record RegistroMedicoDTO(
+public record InfoMedicoDTO(
+        @NotBlank(message = "El código es obligatorio")
+        @Positive(message = "El código debe ser mayor a cero")
+        int codigo,
         @NotBlank(message = "El nombre es obligatorio")
         @Length(max = 100, message = "El nombre no puede superar los 100 caracteres")
         String nombre,
@@ -27,9 +30,6 @@ public record RegistroMedicoDTO(
         Ciudad ciudad,
         @NotNull(message = "Por favor, seleccione una especialidad")
         Especialidad especialidad,
-        @NotBlank(message = "La contraseña es obligatoria")
-        @Length(max = 80, message = "La contraseña no puede superar los 80 caracteres")
-        String contrasenia,
         @NotBlank(message = "La foto es obligatoria")
         @Length(max = 500, message = "La url de la foto no puede superar los 500 caracteres")
         String urlFoto,

@@ -8,13 +8,13 @@ public interface AdministradorServicio {
 
     int crearMedico(RegistroMedicoDTO medicoDTO) throws Exception;
 
-    int actualizarMedico(DetalleMedicoDTO detalleMedicoDTO) throws Exception;
+    int actualizarMedico(InfoMedicoDTO infoMedicoDTO) throws Exception;
 
     void eliminarMedico(int codigo) throws Exception;
 
     List<ItemMedicoDTO> listarMedicos() throws Exception;
 
-    DetalleMedicoDTO obtenerMedico(int codigo) throws Exception;
+    InfoMedicoDTO obtenerMedico(int codigo) throws Exception;
 
     List<ItemConsultaDTO> listarCitas() throws Exception;
 

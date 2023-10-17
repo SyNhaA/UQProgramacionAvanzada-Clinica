@@ -73,7 +73,7 @@ public class AdministradorServicioImpl implements AdministradorServicio {
     }
 
     @Override
-    public int actualizarMedico(DetalleMedicoDTO medicoDTO) throws Exception {
+    public int actualizarMedico(InfoMedicoDTO medicoDTO) throws Exception {
         Optional<Medico> opcional = medicoRepo.findById(medicoDTO.codigo());
 
         if( opcional.isEmpty() ) {
@@ -127,7 +127,7 @@ public class AdministradorServicioImpl implements AdministradorServicio {
     }
 
     @Override
-    public DetalleMedicoDTO obtenerMedico(int codigo) throws Exception {
+    public InfoMedicoDTO obtenerMedico(int codigo) throws Exception {
         Optional<Medico> opcional = medicoRepo.findById(codigo);
 
         if( opcional.isEmpty() ) {
@@ -147,7 +147,7 @@ public class AdministradorServicioImpl implements AdministradorServicio {
             ) );
         }
 
-        return new DetalleMedicoDTO(
+        return new InfoMedicoDTO(
                 buscado.getCodigo(),
                 buscado.getNombre(),
                 buscado.getCorreo(),

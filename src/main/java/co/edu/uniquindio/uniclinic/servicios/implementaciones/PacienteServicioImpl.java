@@ -1,7 +1,6 @@
 package co.edu.uniquindio.uniclinic.servicios.implementaciones;
 
 import co.edu.uniquindio.uniclinic.dto.paciente.*;
-import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Paciente;
 import co.edu.uniquindio.uniclinic.repositorios.PacienteRepo;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.PacienteServicio;
@@ -22,7 +21,7 @@ public class PacienteServicioImpl implements PacienteServicio {
     }
 
     @Override
-    public int editarPerfil(DetallePacienteDTO detallePacienteDTO) throws Exception {
+    public int editarPerfil(InfoPacienteDTO infoPacienteDTO) throws Exception {
         return 0;
     }
 
@@ -32,7 +31,7 @@ public class PacienteServicioImpl implements PacienteServicio {
     }
 
     @Override
-    public DetallePacienteDTO verDetallePaciente(int codigo) throws Exception {
+    public InfoPacienteDTO verDetallePaciente(int codigo) throws Exception {
         return null;
     }
 

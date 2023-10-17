@@ -19,7 +19,6 @@ public class DiaLibre implements Serializable {
     @EqualsAndHashCode.Include
     private int codigo;
 
-    @Future
     @Column(nullable = false)
     private LocalDate dia;
 

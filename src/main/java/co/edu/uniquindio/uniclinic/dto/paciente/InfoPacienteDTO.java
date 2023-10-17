@@ -1,14 +1,19 @@
-package co.edu.uniquindio.uniclinic.dto.admin;
+package co.edu.uniquindio.uniclinic.dto.paciente;
 
-import co.edu.uniquindio.uniclinic.dto.medico.HorarioDTO;
 import co.edu.uniquindio.uniclinic.modelo.enums.Ciudad;
-import co.edu.uniquindio.uniclinic.modelo.enums.Especialidad;
+import co.edu.uniquindio.uniclinic.modelo.enums.EPS;
+import co.edu.uniquindio.uniclinic.modelo.enums.TipoSangre;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public record RegistroMedicoDTO(
+public record InfoPacienteDTO(
+        @NotBlank(message = "El código es obligatorio")
+        @Positive(message = "El código debe ser mayor a cero")
+        int codigo,
         @NotBlank(message = "El nombre es obligatorio")
         @Length(max = 100, message = "El nombre no puede superar los 100 caracteres")
         String nombre,
@@ -25,15 +30,18 @@ public record RegistroMedicoDTO(
         String telefono,
         @NotNull(message = "Por favor, seleccione una ciudad")
         Ciudad ciudad,
-        @NotNull(message = "Por favor, seleccione una especialidad")
-        Especialidad especialidad,
-        @NotBlank(message = "La contraseña es obligatoria")
-        @Length(max = 80, message = "La contraseña no puede superar los 80 caracteres")
-        String contrasenia,
+        @NotNull(message = "Por favor, seleccione una EPS")
+        EPS eps,
+        @NotNull(message = "Por favor, seleccione un tipo de sangre")
+        TipoSangre tipoSangre,
         @NotBlank(message = "La foto es obligatoria")
         @Length(max = 500, message = "La url de la foto no puede superar los 500 caracteres")
         String urlFoto,
-        @NotEmpty(message = "Por favor, ingrese los horarios de atención")
-        List<HorarioDTO> horarios
+        @NotNull(message = "Por favor, ingrese la fecha de nacimiento")
+        @Past(message = "La fecha de nacimiento debe ser anterior a la fecha actual")
+        LocalDate fechaNacimiento,
+        @NotBlank(message = "Las alergias son obligatorias")
+        @Length(max = 500, message = "Las alergias no pueden superar los 500 caracteres")
+        String alergias
 ) {
 }

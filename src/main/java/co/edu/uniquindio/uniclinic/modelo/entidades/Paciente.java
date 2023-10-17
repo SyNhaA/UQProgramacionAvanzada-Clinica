@@ -17,8 +17,8 @@ public class Paciente extends Usuario implements Serializable {
     @Column(nullable = false)
     private LocalDate fechaNacimiento;
 
-    @ElementCollection
-    private List<String> alergias;
+    @Column(nullable = false, length = 500)
+    private String alergias;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

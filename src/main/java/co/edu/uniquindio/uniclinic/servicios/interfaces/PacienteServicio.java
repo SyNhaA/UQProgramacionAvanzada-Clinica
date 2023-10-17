@@ -8,11 +8,11 @@ public interface PacienteServicio {
 
     int registrarse(RegistroPacienteDTO pacienteDTO) throws Exception;
 
-    int editarPerfil(DetallePacienteDTO detallePacienteDTO) throws Exception;
+    int editarPerfil(InfoPacienteDTO infoPacienteDTO) throws Exception;
 
     void eliminarCuenta(int codigo) throws Exception;
 
-    DetallePacienteDTO verDetallePaciente(int codigo) throws Exception;
+    InfoPacienteDTO verDetallePaciente(int codigo) throws Exception;
 
     int agendarCita(RegistroCitaDTO registroCitaDTO) throws Exception;
 

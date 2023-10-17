@@ -22,7 +22,6 @@ public class Medicamento implements Serializable {
     @Column(nullable = false, length = 75)
     private String nombre;
 
-    @Positive
     @Column(nullable = false)
     private int cantidad;
 
