@@ -2,7 +2,6 @@ package co.edu.uniquindio.uniclinic.servicios.implementaciones;
 
 import co.edu.uniquindio.uniclinic.dto.pqrs.*;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Cuenta;
-import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Mensaje;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Pqrs;
 import co.edu.uniquindio.uniclinic.modelo.enums.EstadoPQRS;

@@ -15,16 +15,16 @@ public class EmailServicioImpl implements EmailServicio {
     private final JavaMailSender javaMailSender;
 
     @Override
-    public String enviarCorreo(EmailDTO emailDTO) throws Exception {
+    public void enviarCorreo(EmailDTO emailDTO) throws Exception {
         MimeMessage mensaje = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mensaje);
+
         helper.setFrom(emailDTO.remitente());
         helper.setTo(emailDTO.destinatario());
         helper.setSubject(emailDTO.asunto());
         helper.setText(emailDTO.mensaje(), true);
-        javaMailSender.send(mensaje);
 
-        return "Correo enviado exitosamente";
+        javaMailSender.send(mensaje);
     }
 
 }

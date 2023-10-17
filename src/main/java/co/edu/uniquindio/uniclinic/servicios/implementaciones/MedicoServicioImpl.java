@@ -2,6 +2,7 @@ package co.edu.uniquindio.uniclinic.servicios.implementaciones;
 
 import co.edu.uniquindio.uniclinic.dto.admin.ItemConsultaDTO;
 import co.edu.uniquindio.uniclinic.dto.medico.DiaLibreDTO;
+import co.edu.uniquindio.uniclinic.dto.medico.RegistroAtencionDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Cita;
 import co.edu.uniquindio.uniclinic.modelo.entidades.DiaLibre;
@@ -53,6 +54,11 @@ public class MedicoServicioImpl implements MedicoServicio {
         }
 
         return listaItemConsultaDTOS;
+    }
+
+    @Override
+    public int atenderCita(RegistroAtencionDTO registroAtencionDTO) throws Exception {
+        return 0;
     }
 
     @Override

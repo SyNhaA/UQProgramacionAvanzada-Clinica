@@ -30,13 +30,14 @@ public class ImagenesServicioImpl implements ImagenesServicio {
     public Map subirImagen(MultipartFile imagen) throws Exception {
         File file = convertir(imagen);
 
-        return cloudinary.uploader().upload(file, ObjectUtils.asMap("folder", "uniquindio/uniclinic/fotos"));
+        return cloudinary.uploader().upload(file, ObjectUtils.asMap("folder", "uniquindio/proyecto/fotos"));
     }
 
     @Override
     public Map eliminarImagen(String idImagen) throws Exception {
         return cloudinary.uploader().destroy(idImagen, ObjectUtils.emptyMap());
     }
+
     private File convertir(MultipartFile imagen) throws IOException {
         File file = File.createTempFile(imagen.getOriginalFilename(), null);
         FileOutputStream fos = new FileOutputStream(file);

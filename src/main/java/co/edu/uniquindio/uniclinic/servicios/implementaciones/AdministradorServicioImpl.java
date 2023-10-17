@@ -11,6 +11,7 @@ import co.edu.uniquindio.uniclinic.repositorios.HorarioRepo;
 import co.edu.uniquindio.uniclinic.repositorios.MedicoRepo;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.AdministradorServicio;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,13 +37,15 @@ public class AdministradorServicioImpl implements AdministradorServicio {
         }
 
         Medico medico = new Medico();
-        medico.setCedula(medicoDTO.cedula() );
+        medico.setCedula(medicoDTO.cedula());
         medico.setTelefono(medicoDTO.telefono());
         medico.setNombre(medicoDTO.nombre() );
         medico.setEspecialidad(medicoDTO.especialidad());
         medico.setCiudad(medicoDTO.ciudad());
-        medico.setCorreo(medicoDTO.correo() );
-        medico.setContrasenia(medicoDTO.contrasenia());
+        medico.setCorreo(medicoDTO.correo());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String passwordEncriptada = passwordEncoder.encode(medicoDTO.contrasenia());
+        medico.setContrasenia(passwordEncriptada);
         medico.setUrlFoto(medicoDTO.urlFoto());
         medico.setEstado(EstadoUsuario.ACTIVO);
 
