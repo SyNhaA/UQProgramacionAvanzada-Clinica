@@ -30,6 +30,7 @@ public class Usuario extends Cuenta implements Serializable {
     private Ciudad ciudad;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private EstadoUsuario estado;
 
 }
