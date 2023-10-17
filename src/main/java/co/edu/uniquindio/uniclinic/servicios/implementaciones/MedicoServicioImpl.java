@@ -2,11 +2,11 @@ package co.edu.uniquindio.uniclinic.servicios.implementaciones;
 
 import co.edu.uniquindio.uniclinic.dto.admin.ItemConsultaDTO;
 import co.edu.uniquindio.uniclinic.dto.medico.DiaLibreDTO;
-import co.edu.uniquindio.uniclinic.dto.medico.RegistroAtencionDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Cita;
 import co.edu.uniquindio.uniclinic.modelo.entidades.DiaLibre;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
+import co.edu.uniquindio.uniclinic.repositorios.DiaLibreRepo;
 import co.edu.uniquindio.uniclinic.repositorios.MedicoRepo;
 import co.edu.uniquindio.uniclinic.repositorios.PacienteRepo;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.MedicoServicio;
@@ -26,6 +26,9 @@ public class MedicoServicioImpl implements MedicoServicio {
     private final PacienteRepo pacienteRepo;
     private final PacienteServicioImpl pacienteServicio;
 
+    private final DiaLibreRepo diaLibreRepo;
+
+
     @Override
     public List<ItemConsultaDTO> listarCitasPendientes(int codigoMedico) throws Exception {
         if (medicoExiste(codigoMedico).isEmpty()) {
@@ -39,7 +42,7 @@ public class MedicoServicioImpl implements MedicoServicio {
         List<ItemConsultaDTO> listaItemConsultaDTOS = new ArrayList<>();
         for (Cita c : medicoRepo.listarCitasPendiente(codigoMedico)) {
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
-                    c.getMedico().getCodigo(),
+                    c.getCodigo(),
                     c.getPaciente().getCedula(),
                     c.getPaciente().getNombre(),
                     c.getFechaCita(),
@@ -50,13 +53,6 @@ public class MedicoServicioImpl implements MedicoServicio {
         }
 
         return listaItemConsultaDTOS;
-    }
-
-
-    @Override
-    public int atenderCita(RegistroAtencionDTO registroAtencionDTO) throws Exception {
-        // Pendiente
-        return 0;
     }
 
     @Override
@@ -92,16 +88,17 @@ public class MedicoServicioImpl implements MedicoServicio {
 
         Optional<Medico> medico = medicoRepo.findById(codigoMedico);
         DiaLibre diaLibre = new DiaLibre();
-        diaLibre.setDia(diaLibreDTO.dia());
-        diaLibre.setMedico(medico.get());
-        // PREGUNTA
-        // No se si guardar el dia, o al guardar el medico se guarde el dia
-        medico.get().getDiasLibres().add(diaLibre);
-        Medico medico__ = medicoRepo.save(medico.get());
+        if (medico.isPresent()) {
+            diaLibre.setDia(diaLibreDTO.dia());
+            diaLibre.setMedico(medico.get());
+        }
 
-        if (medico__ == null) {
+
+        try {
+            diaLibreRepo.save(diaLibre);
             return 1;
-        } else {
+        } catch (Exception e) {
+            e.printStackTrace();
             return 0;
         }
     }
@@ -116,8 +113,6 @@ public class MedicoServicioImpl implements MedicoServicio {
             throw new Exception("El medico no se encuentra " + codigoMedico);
         }
 
-        List<ItemConsultaDTO> listItemConsultaDTO = new ArrayList<>();
-
         ArrayList<ItemConsultaDTO> listaCitasMedico = new ArrayList<>();
         for (Cita c : medicoRepo.listasCitas(codigoMedico)) {
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
@@ -131,7 +126,7 @@ public class MedicoServicioImpl implements MedicoServicio {
             listaCitasMedico.add(itemConsultaDTO);
         }
 
-        return listItemConsultaDTO;
+        return listaCitasMedico;
     }
 
     private Medico medicoIsActive(int codigoMedico) {

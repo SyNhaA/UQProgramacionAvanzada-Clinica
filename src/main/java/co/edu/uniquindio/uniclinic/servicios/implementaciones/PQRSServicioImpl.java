@@ -2,12 +2,11 @@ package co.edu.uniquindio.uniclinic.servicios.implementaciones;
 
 import co.edu.uniquindio.uniclinic.dto.pqrs.*;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Cuenta;
+import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Mensaje;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Pqrs;
 import co.edu.uniquindio.uniclinic.modelo.enums.EstadoPQRS;
-import co.edu.uniquindio.uniclinic.repositorios.CuentaRepo;
-import co.edu.uniquindio.uniclinic.repositorios.MensajeRepo;
-import co.edu.uniquindio.uniclinic.repositorios.PQRSRepo;
+import co.edu.uniquindio.uniclinic.repositorios.*;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.PQRSServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,21 +21,23 @@ import java.util.Optional;
 public class PQRSServicioImpl implements PQRSServicio {
 
     private final PQRSRepo pqrsRepo;
+    private final PacienteRepo pacienteRepo;
     private final MensajeRepo mensajeRepo;
     private final CuentaRepo cuentaRepo;
+    private final CitaRepo citaRepo;
 
     @Override
     public List<ItemPQRSAdminDTO> listarPQRS() throws Exception {
         List<Pqrs> listaPqrs = pqrsRepo.findAll();
         List<ItemPQRSAdminDTO> respuesta = new ArrayList<>();
 
-        for( Pqrs p: listaPqrs ) {
-            respuesta.add( new ItemPQRSAdminDTO(
+        for (Pqrs p : listaPqrs) {
+            respuesta.add(new ItemPQRSAdminDTO(
                     p.getCodigo(),
                     p.getCita().getPaciente().getNombre(),
                     p.getFechaCreacion(),
                     p.getEstado()
-            ) );
+            ));
         }
 
         return respuesta;
@@ -46,8 +47,8 @@ public class PQRSServicioImpl implements PQRSServicio {
     public void cambiarEstadoPQRS(int codigoPQRS, EstadoPQRS estadoPQRS) throws Exception {
         Optional<Pqrs> opcional = pqrsRepo.findById(codigoPQRS);
 
-        if( opcional.isEmpty() ) {
-            throw new Exception("No existe un PQRS con el código "+codigoPQRS);
+        if (opcional.isEmpty()) {
+            throw new Exception("No existe un PQRS con el código " + codigoPQRS);
         }
 
         Pqrs pqrs = opcional.get();
@@ -58,20 +59,53 @@ public class PQRSServicioImpl implements PQRSServicio {
 
     @Override
     public List<ItemPQRSPacienteDTO> listarPQRSPaciente(int codigoPaciente) throws Exception {
-        return null;
+
+        if (pacienteRepo.findById(codigoPaciente).isEmpty()){
+            throw new Exception("No hay pacientes registrados con ese codigo");
+        }
+        List<Pqrs> listaPqrs = pqrsRepo.listarPqrsPendiente(codigoPaciente);
+        if (listaPqrs.size() == 0){
+            throw new Exception("EL paciente no tiene pqrs registradas");
+        }
+        return listaPqrs.stream().map(pq -> new ItemPQRSPacienteDTO(
+                pq.getCodigo(),
+                pq.getEstado(),
+                pq.getMotivo(),
+                pq.getFechaCreacion()
+        )).toList();
     }
 
     @Override
     public int crearPQRS(RegistroPQRSDTO registroPQRSDTO) throws Exception {
-        return 0;
+
+        if (registroPQRSDTO.codigoCita() <= 0) {
+            throw new IllegalArgumentException("El código de cita debe ser un valor positivo.");
+        }
+
+        if (registroPQRSDTO.mensaje() == null || registroPQRSDTO.mensaje().isEmpty()) {
+            throw new IllegalArgumentException("El mensaje no puede estar vacío.");
+        }
+
+        if (citaRepo.findById(registroPQRSDTO.codigoCita()).isPresent()) {
+            throw new IllegalArgumentException("No existe una cita con el codigo enviado");
+        }
+
+        Pqrs pqrs = new Pqrs();
+        // AGREGAR MENSAJE
+        pqrs.setFechaCreacion(LocalDateTime.now());
+        pqrs.setEstado(EstadoPQRS.EN_PROCESO);
+        pqrs.setCita(citaRepo.getById(registroPQRSDTO.codigoCita()));
+
+        Pqrs guardado = pqrsRepo.save(pqrs);
+        return 1;
     }
 
     @Override
     public DetallePQRSDTO verDetallePQRS(int codigoPQRS) throws Exception {
         Optional<Pqrs> opcional = pqrsRepo.findById(codigoPQRS);
 
-        if(opcional.isEmpty()) {
-            throw new Exception("No existe un PQRS con el código "+codigoPQRS);
+        if (opcional.isEmpty()) {
+            throw new Exception("No existe un PQRS con el código " + codigoPQRS);
         }
 
         Pqrs buscado = opcional.get();
@@ -102,20 +136,20 @@ public class PQRSServicioImpl implements PQRSServicio {
     public int responderPQRS(RegistroRespuestaDTO registroRespuestaDTO) throws Exception {
         Optional<Pqrs> opcionalPQRS = pqrsRepo.findById(registroRespuestaDTO.codigoPQRS());
 
-        if(opcionalPQRS.isEmpty()) {
-            throw new Exception("No existe un PQRS con el código "+registroRespuestaDTO.codigoPQRS());
+        if (opcionalPQRS.isEmpty()) {
+            throw new Exception("No existe un PQRS con el código " + registroRespuestaDTO.codigoPQRS());
         }
 
         Optional<Cuenta> opcionalCuenta = cuentaRepo.findById(registroRespuestaDTO.codigoCuenta());
 
-        if(opcionalCuenta.isEmpty()) {
-            throw new Exception("No existe una cuenta con el código "+registroRespuestaDTO.codigoCuenta());
+        if (opcionalCuenta.isEmpty()) {
+            throw new Exception("No existe una cuenta con el código " + registroRespuestaDTO.codigoCuenta());
         }
 
         Optional<Mensaje> opcionalMensaje = mensajeRepo.findById(registroRespuestaDTO.codigoMensaje());
 
-        if(opcionalMensaje.isEmpty()) {
-            throw new Exception("No existe un mensaje con el código "+registroRespuestaDTO.codigoMensaje());
+        if (opcionalMensaje.isEmpty()) {
+            throw new Exception("No existe un mensaje con el código " + registroRespuestaDTO.codigoMensaje());
         }
 
         Mensaje mensajeNuevo = new Mensaje();
