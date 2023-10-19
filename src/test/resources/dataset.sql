@@ -1,23 +1,40 @@
 -- Registros para la entidad "cuenta"
 -- CODIGO | CONTRASEÑA | CORREO
-insert into cuenta values(1, 'contraseña1', 'pepito@email.com');
-insert into cuenta values(2, 'contraseña2', 'juanita@email.com');
-insert into cuenta values(3, 'contraseña3', 'carlos@email.com');
-insert into cuenta values(4, 'contraseña4', 'laura@email.com');
-insert into cuenta values(5, 'contraseña5', 'roberto@email.com');
-insert into cuenta values(6, 'contraseña6', 'ana@email.com');
-insert into cuenta values(7, 'contraseña7', 'maria@email.com');
-insert into cuenta values(8, 'contraseña8', 'pedro@email.com');
+insert into cuenta values(1, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'pepito@email.com');
+insert into cuenta values(2, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'juanita@email.com');
+insert into cuenta values(3, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'carlos@email.com');
+insert into cuenta values(4, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'laura@email.com');
+insert into cuenta values(5, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'roberto@email.com');
+insert into cuenta values(6, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'ana@email.com');
+insert into cuenta values(7, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'maria@email.com');
+insert into cuenta values(8, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'pedro@email.com');
 insert into cuenta values(9, 'contraseña9', 'sara@email.com');
 insert into cuenta values(10, 'contraseña10', 'david@email.com');
 
+insert into cuenta values(11, 'contraseña1', 'pepito1@email.com');
+insert into cuenta values(12, 'contraseña2', 'juanita1@email.com');
+insert into cuenta values(13, 'contraseña3', 'carlos1@email.com');
+insert into cuenta values(14, 'contraseña4', 'laura1@email.com');
+insert into cuenta values(15, 'contraseña5', 'roberto1@email.com');
+insert into cuenta values(16, 'contraseña6', 'ana1@email.com');
+insert into cuenta values(17, 'contraseña7', 'maria1@email.com');
+insert into cuenta values(18, 'contraseña8', 'pedro1@email.com');
+insert into cuenta values(19, 'contraseña9', 'sara1@email.com');
+insert into cuenta values(20, 'contraseña10', 'david1@email.com');
+
+insert into cuenta values(21, 'contraseña10', 'david2@email.com');
+insert into cuenta values(22, 'contraseña10', 'david3@email.com');
+insert into cuenta values(23, 'contraseña10', 'david4@email.com');
+insert into cuenta values(24, 'contraseña10', 'david5@email.com');
+insert into cuenta values(25, 'contraseña10', 'david6@email.com');
+
 -- Registros para la entidad "administrador"
 -- CODIGO
-insert into administrador values(1);
-insert into administrador values(2);
-insert into administrador values(3);
-insert into administrador values(4);
-insert into administrador values(5);
+insert into administrador values(21);
+insert into administrador values(22);
+insert into administrador values(23);
+insert into administrador values(24);
+insert into administrador values(25);
 
 -- Registros para la entidad "paciente"
 -- CODIGO | ESTADO (0: ACTIVO, 1: INACTIVO) | FECHA_NACIMIENTO | CEDULA | TELEFONO | NOMBRE | ALERGIAS | URL_FOTO | CIUDAD | EPS | TIPO_SANGRE
@@ -34,29 +51,29 @@ insert into paciente values(10, 0, '1983-08-08', '1010', '555-000', 'Julia Ramí
 
 -- Registros para la entidad "medico"
 -- CODIGO | ESTADO (0: ACTIVO, 1: INACTIVO) | CEDULA | TELEFONO | NOMBRE | URL_FOTO | CIUDAD | ESPECIALIDAD
-insert into medico values(1, 0, '1989678967', '555-123', 'Dr. Rodriguez', 'https://url_foto1.com', 'ARMENIA', 'CARDIOLOGIA');
-insert into medico values(2, 0, '3214567890', '555-234', 'Dra. Perez', 'https://url_foto2.com', 'BOGOTA', 'DERMATOLOGIA');
-insert into medico values(3, 0, '7890123456', '555-345', 'Dr. Gómez', 'https://url_foto3.com', 'CALARCA', 'ENDOCRINOLOGIA');
-insert into medico values(4, 0, '4567890123', '555-456', 'Dra. Lopez', 'https://url_foto4.com', 'CALI', 'GASTROENTEROLOGIA');
-insert into medico values(5, 0, '2345678901', '555-567', 'Dr. Martinez', 'https://url_foto5.com', 'CIRCASIA', 'GINECOLOGIA');
-insert into medico values(6, 0, '8901234567', '555-678', 'Dra. Fernandez', 'https://url_foto6.com', 'DOSQUEBRADAS', 'MEDICINA_GENERAL');
-insert into medico values(7, 0, '5678901234', '555-789', 'Dr. Ramirez', 'https://url_foto7.com', 'IBAGUE', 'NEUROLOGIA');
-insert into medico values(8, 0, '3456789012', '555-890', 'Dra. Sanchez', 'https://url_foto8.com', 'MANIZALES', 'OFTALMOLOGIA');
-insert into medico values(9, 0, '1234567890', '555-901', 'Dr. Torres', 'https://url_foto9.com', 'PEREIRA', 'OTORRINOLARINGOLOGIA');
-insert into medico values(10, 0, '6789012345', '555-012', 'Dra. Gonzalez', 'https://url_foto10.com', 'SALENTO', 'PEDIATRIA');
+insert into medico values(11, 0, '1989678967', '555-123', 'Dr. Rodriguez', 'https://url_foto1.com', 'ARMENIA', 'CARDIOLOGIA');
+insert into medico values(12, 0, '3214567890', '555-234', 'Dra. Perez', 'https://url_foto2.com', 'BOGOTA', 'DERMATOLOGIA');
+insert into medico values(13, 0, '7890123456', '555-345', 'Dr. Gómez', 'https://url_foto3.com', 'CALARCA', 'ENDOCRINOLOGIA');
+insert into medico values(14, 0, '4567890123', '555-456', 'Dra. Lopez', 'https://url_foto4.com', 'CALI', 'GASTROENTEROLOGIA');
+insert into medico values(15, 0, '2345678901', '555-567', 'Dr. Martinez', 'https://url_foto5.com', 'CIRCASIA', 'GINECOLOGIA');
+insert into medico values(16, 0, '8901234567', '555-678', 'Dra. Fernandez', 'https://url_foto6.com', 'DOSQUEBRADAS', 'MEDICINA_GENERAL');
+insert into medico values(17, 0, '5678901234', '555-789', 'Dr. Ramirez', 'https://url_foto7.com', 'IBAGUE', 'NEUROLOGIA');
+insert into medico values(18, 0, '3456789012', '555-890', 'Dra. Sanchez', 'https://url_foto8.com', 'MANIZALES', 'OFTALMOLOGIA');
+insert into medico values(19, 0, '1234567890', '555-901', 'Dr. Torres', 'https://url_foto9.com', 'PEREIRA', 'OTORRINOLARINGOLOGIA');
+insert into medico values(20, 0, '6789012345', '555-012', 'Dra. Gonzalez', 'https://url_foto10.com', 'SALENTO', 'PEDIATRIA');
 
 -- Registros para la entidad "cita"
 -- CODIGO | MEDICO_CODIGO | PACIENTE_CODIGO | FECHA_CITA | FECHA_CREACION | MOTIVO | ESTADO (CANCELADA, COMPLETADA, PROGRAMADA)
-insert into cita values(1, 3, 8, '2023-10-06 09:30:00', '2023-10-05 08:00:00', 'Consulta médica', 'COMPLETADA');
-insert into cita values(2, 6, 1, '2023-10-06 11:15:00', '2023-10-05 09:20:00', 'Examen de rutina', 'COMPLETADA');
-insert into cita values(3, 9, 4, '2023-10-06 13:00:00', '2023-10-05 10:45:00', 'Control de medicación', 'CANCELADA');
-insert into cita values(4, 3, 7, '2023-10-06 15:45:00', '2023-10-05 12:30:00', 'Seguimiento postoperatorio', 'CANCELADA');
-insert into cita values(5, 5, 10, '2023-10-06 17:30:00', '2023-10-05 14:15:00', 'Evaluación dental', 'CANCELADA');
-insert into cita values(6, 8, 2, '2023-10-06 09:00:00', '2023-10-05 15:05:00', 'Terapia física', 'CANCELADA');
-insert into cita values(7, 10, 5, '2023-10-06 11:30:00', '2023-10-05 16:40:00', 'Consulta psicológica', 'COMPLETADA');
-insert into cita values(8, 4, 9, '2023-10-06 14:15:00', '2023-10-05 17:55:00', 'Control de embarazo', 'CANCELADA');
-insert into cita values(9, 3, 3, '2023-10-06 16:00:00', '2023-10-05 19:20:00', 'Chequeo de laboratorio', 'COMPLETADA');
-insert into cita values(10, 7, 6, '2023-10-06 18:45:00', '2023-10-05 20:10:00', 'Consulta de alergias', 'CANCELADA');
+insert into cita values(1, 13, 8, '2023-10-06 09:30:00', '2023-10-05 08:00:00', 'Consulta médica', 'COMPLETADA');
+insert into cita values(2, 16, 1, '2023-10-06 11:15:00', '2023-10-05 09:20:00', 'Examen de rutina', 'COMPLETADA');
+insert into cita values(3, 19, 4, '2023-10-06 13:00:00', '2023-10-05 10:45:00', 'Control de medicación', 'CANCELADA');
+insert into cita values(4, 13, 7, '2023-10-06 15:45:00', '2023-10-05 12:30:00', 'Seguimiento postoperatorio', 'CANCELADA');
+insert into cita values(5, 15, 10, '2023-10-06 17:30:00', '2023-10-05 14:15:00', 'Evaluación dental', 'CANCELADA');
+insert into cita values(6, 18, 2, '2023-10-06 09:00:00', '2023-10-05 15:05:00', 'Terapia física', 'CANCELADA');
+insert into cita values(7, 20, 5, '2023-10-06 11:30:00', '2023-10-05 16:40:00', 'Consulta psicológica', 'COMPLETADA');
+insert into cita values(8, 14, 9, '2023-10-06 14:15:00', '2023-10-05 17:55:00', 'Control de embarazo', 'CANCELADA');
+insert into cita values(9, 13, 3, '2023-10-06 16:00:00', '2023-10-05 19:20:00', 'Chequeo de laboratorio', 'COMPLETADA');
+insert into cita values(10, 17, 6, '2023-10-06 18:45:00', '2023-10-05 20:10:00', 'Consulta de alergias', 'CANCELADA');
 
 -- Registros para la entidad "pqrs"
 -- CITA_CODIGO | CODIGO | FECHA_CREACION | MOTIVO | ESTADO (ARCHIVADO, EN_PROCESO, NUEVO, RESUELTO)
@@ -99,29 +116,29 @@ insert into atencion_medica values(9, 10, 'Problemas digestivos', 'Recomendar di
 
 -- Registros para la entidad "dia_libre"
 -- CODIGO | FECHA | MEDICO_CODIGO
-insert into dia_libre values(1, '2023-10-07', 3);
-insert into dia_libre values(2, '2023-10-09', 6);
-insert into dia_libre values(3, '2023-10-11', 1);
-insert into dia_libre values(4, '2023-10-12', 8);
-insert into dia_libre values(5, '2023-10-14', 5);
-insert into dia_libre values(6, '2023-10-17', 9);
-insert into dia_libre values(7, '2023-10-19', 2);
-insert into dia_libre values(8, '2023-10-21', 7);
-insert into dia_libre values(9, '2023-10-24', 4);
-insert into dia_libre values(10, '2023-10-26', 10);
+insert into dia_libre values(1, '2023-10-07', 13);
+insert into dia_libre values(2, '2023-10-09', 16);
+insert into dia_libre values(3, '2023-10-11', 11);
+insert into dia_libre values(4, '2023-10-12', 18);
+insert into dia_libre values(5, '2023-10-14', 15);
+insert into dia_libre values(6, '2023-10-17', 19);
+insert into dia_libre values(7, '2023-10-19', 12);
+insert into dia_libre values(8, '2023-10-21', 17);
+insert into dia_libre values(9, '2023-10-24', 14);
+insert into dia_libre values(10, '2023-10-26', 20);
 
 -- Registros para la entidad "horario_medico"
 -- CODIGO | HORA_FIN | HORA_INICIO | MEDICO_CODIGO | DIA
-insert into horario_medico values(1, '14:00:00', '09:00:00', 3, 'VIERNES');
-insert into horario_medico values(2, '15:00:00', '08:00:00', 6, 'DOMINGO');
-insert into horario_medico values(3, '18:00:00', '07:00:00', 1, 'DOMINGO');
-insert into horario_medico values(4, '17:30:00', '10:00:00', 8, 'SABADO');
-insert into horario_medico values(5, '14:30:00', '10:30:00', 5, 'MIERCOLES');
-insert into horario_medico values(6, '16:00:00', '10:30:00', 9, 'JUEVES');
-insert into horario_medico values(7, '13:30:00', '09:30:00', 3, 'LUNES');
-insert into horario_medico values(8, '19:00:00', '08:00:00', 3, 'MARTES');
-insert into horario_medico values(9, '18:30:00', '06:30:00', 4, 'VIERNES');
-insert into horario_medico values(10, '17:00:00', '07:00:00', 10, 'LUNES');
+insert into horario_medico values(1, '14:00:00', '09:00:00', 13, 'VIERNES');
+insert into horario_medico values(2, '15:00:00', '08:00:00', 16, 'DOMINGO');
+insert into horario_medico values(3, '18:00:00', '07:00:00', 11, 'DOMINGO');
+insert into horario_medico values(4, '17:30:00', '10:00:00', 18, 'SABADO');
+insert into horario_medico values(5, '14:30:00', '10:30:00', 15, 'MIERCOLES');
+insert into horario_medico values(6, '16:00:00', '10:30:00', 19, 'JUEVES');
+insert into horario_medico values(7, '13:30:00', '09:30:00', 13, 'LUNES');
+insert into horario_medico values(8, '19:00:00', '08:00:00', 13, 'MARTES');
+insert into horario_medico values(9, '18:30:00', '06:30:00', 14, 'VIERNES');
+insert into horario_medico values(10, '17:00:00', '07:00:00', 20, 'LUNES');
 
 -- Registros para la entidad "incapacidad"
 -- ATENCION_CODIGO | CODIGO | FECHA_FIN | FECHA_INICIO | MOTIVO

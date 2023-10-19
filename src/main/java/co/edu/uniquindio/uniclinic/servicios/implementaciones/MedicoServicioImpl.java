@@ -2,7 +2,6 @@ package co.edu.uniquindio.uniclinic.servicios.implementaciones;
 
 import co.edu.uniquindio.uniclinic.dto.admin.ItemConsultaDTO;
 import co.edu.uniquindio.uniclinic.dto.medico.DiaLibreDTO;
-import co.edu.uniquindio.uniclinic.dto.medico.RegistroAtencionDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Cita;
 import co.edu.uniquindio.uniclinic.modelo.entidades.DiaLibre;
@@ -53,11 +52,11 @@ public class MedicoServicioImpl implements MedicoServicio {
 
         return listaItemConsultaDTOS;
     }
-
-    @Override
-    public int atenderCita(RegistroAtencionDTO registroAtencionDTO) throws Exception {
-        return 0;
-    }
+//
+//    @Override
+//    public int atenderCita(RegistroAtencionDTO registroAtencionDTO) throws Exception {
+//        return 0;
+//    }
 
     @Override
     public List<ItemCitaDTO> listarHistorialAtencionesPaciente(int codigoPaciente) throws Exception {
@@ -117,7 +116,11 @@ public class MedicoServicioImpl implements MedicoServicio {
         }
 
         ArrayList<ItemConsultaDTO> listaCitasMedico = new ArrayList<>();
-        for (Cita c : medicoRepo.listasCitas(codigoMedico)) {
+
+        List<Cita> citas =medicoRepo.listasCitas(codigoMedico);
+
+        for (Cita c : citas) {
+            System.out.println("Esl estado es: " + c.getEstado());
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
                     c.getCodigo(),
                     c.getPaciente().getCedula(),
