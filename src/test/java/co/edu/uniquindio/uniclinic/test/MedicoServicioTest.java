@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
@@ -56,8 +57,8 @@ public class MedicoServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void listarCitasRealizadasMedico() throws Exception {
-        List<ItemConsultaDTO> citas = medicoServicio.listarCitasRealizadasMedico(3);
-        Assertions.assertEquals(2, citas.size());
+        List<ItemConsultaDTO> citas = medicoServicio.listarCitasRealizadasMedico(13);
+        Assertions.assertEquals(3, citas.size());
     }
 
 }

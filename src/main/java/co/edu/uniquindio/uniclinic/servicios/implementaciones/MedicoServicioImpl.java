@@ -116,7 +116,10 @@ public class MedicoServicioImpl implements MedicoServicio {
         }
 
         ArrayList<ItemConsultaDTO> listaCitasMedico = new ArrayList<>();
-        for (Cita c : medicoRepo.listasCitas(codigoMedico)) {
+
+        List<Cita> citas =medicoRepo.listasCitas(codigoMedico);
+
+        for (Cita c : citas) {
             System.out.println("Esl estado es: " + c.getEstado());
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
                     c.getCodigo(),
