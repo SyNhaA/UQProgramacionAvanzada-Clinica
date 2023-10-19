@@ -246,9 +246,11 @@ public class AdministradorServicioImpl implements AdministradorServicio {
 
     @Override
     public List<ItemConsultaDTO> listarConsultasMedico(int codigoMedico) throws ResourceNotFoundException {
+        System.out.println("LLEGUE HASTA AQUI 3");
         List<Cita> citas = citaRepo.findCitasCompletadasMedico(codigoMedico);
+        System.out.println("LLEGUE HASTA AQUI 2");
         List<ItemConsultaDTO> respuesta = new ArrayList<>();
-
+        System.out.println("LLEGUE HASTA AQUI 1");
         if(citas.isEmpty()) {
             throw new ResourceNotFoundException("No se han encontrado consultas realizadas por este médico");
         }

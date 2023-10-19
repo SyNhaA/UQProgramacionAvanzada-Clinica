@@ -56,8 +56,8 @@ public class MedicoServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void listarCitasRealizadasMedico() throws Exception {
-        List<ItemConsultaDTO> citas = medicoServicio.listarCitasRealizadasMedico(5);
-        System.out.println(citas);
+        List<ItemConsultaDTO> citas = medicoServicio.listarCitasRealizadasMedico(3);
+        Assertions.assertEquals(2, citas.size());
     }
 
 }

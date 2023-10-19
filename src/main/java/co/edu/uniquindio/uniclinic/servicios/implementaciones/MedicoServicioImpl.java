@@ -52,11 +52,11 @@ public class MedicoServicioImpl implements MedicoServicio {
 
         return listaItemConsultaDTOS;
     }
-
-    @Override
-    public int atenderCita(RegistroAtencionDTO registroAtencionDTO) throws Exception {
-        return 0;
-    }
+//
+//    @Override
+//    public int atenderCita(RegistroAtencionDTO registroAtencionDTO) throws Exception {
+//        return 0;
+//    }
 
     @Override
     public List<ItemCitaDTO> listarHistorialAtencionesPaciente(int codigoPaciente) throws Exception {
@@ -117,6 +117,7 @@ public class MedicoServicioImpl implements MedicoServicio {
 
         ArrayList<ItemConsultaDTO> listaCitasMedico = new ArrayList<>();
         for (Cita c : medicoRepo.listasCitas(codigoMedico)) {
+            System.out.println("Esl estado es: " + c.getEstado());
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
                     c.getCodigo(),
                     c.getPaciente().getCedula(),
