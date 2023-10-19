@@ -5,6 +5,7 @@ import co.edu.uniquindio.uniclinic.dto.medico.DiaLibreDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.MedicoServicio;
 import jakarta.transaction.Transactional;
+import org.apache.catalina.filters.ExpiresFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class MedicoServicioTest {
     public void listarCitasPendientesTest() throws Exception {
         // Crea un médico de prueba
         List<ItemConsultaDTO> citasPendientes = medicoServicio.listarCitasPendientes(5);
+        System.out.println("Resultado" + citasPendientes.size());
         Assertions.assertEquals(5, citasPendientes.size());
     }
 
