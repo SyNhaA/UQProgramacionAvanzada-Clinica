@@ -4,9 +4,11 @@ import co.edu.uniquindio.uniclinic.modelo.entidades.Cuenta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface CuentaRepo extends JpaRepository<Cuenta, Integer> {
 
-    Cuenta findByCorreo(String correo);
+    Optional<Cuenta> findByCorreo(String correo);
 
 }

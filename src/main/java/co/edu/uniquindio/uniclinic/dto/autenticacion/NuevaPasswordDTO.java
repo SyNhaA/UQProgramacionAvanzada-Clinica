@@ -1,4 +1,4 @@
-package co.edu.uniquindio.uniclinic.dto.paciente;
+package co.edu.uniquindio.uniclinic.dto.autenticacion;
 
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;

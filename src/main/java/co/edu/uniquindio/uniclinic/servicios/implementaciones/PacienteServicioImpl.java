@@ -1,5 +1,6 @@
 package co.edu.uniquindio.uniclinic.servicios.implementaciones;
 
+import co.edu.uniquindio.uniclinic.dto.autenticacion.NuevaPasswordDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.*;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Paciente;
 import co.edu.uniquindio.uniclinic.repositorios.PacienteRepo;
@@ -28,16 +29,6 @@ public class PacienteServicioImpl implements PacienteServicio {
     @Override
     public void eliminarCuenta(int codigo) throws Exception {
 
-    }
-
-    @Override
-    public void enviarLinkRecuperacion(String correo) throws Exception {
-
-    }
-
-    @Override
-    public int cambiarPassword(NuevaPasswordDTO nuevaPasswordDTO) throws Exception {
-        return 0;
     }
 
     @Override

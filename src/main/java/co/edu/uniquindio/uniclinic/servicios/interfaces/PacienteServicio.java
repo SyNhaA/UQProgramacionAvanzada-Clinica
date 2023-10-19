@@ -1,5 +1,6 @@
 package co.edu.uniquindio.uniclinic.servicios.interfaces;
 
+import co.edu.uniquindio.uniclinic.dto.autenticacion.NuevaPasswordDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.*;
 
 import java.util.List;
@@ -11,10 +12,6 @@ public interface PacienteServicio {
     int editarPerfil(InfoPacienteDTO infoPacienteDTO) throws Exception;
 
     void eliminarCuenta(int codigo) throws Exception;
-
-    void enviarLinkRecuperacion(String correo) throws Exception;
-
-    int cambiarPassword(NuevaPasswordDTO nuevaPasswordDTO) throws Exception;
 
     InfoPacienteDTO verDetallePaciente(int codigo) throws Exception;
 
