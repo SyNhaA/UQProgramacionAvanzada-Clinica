@@ -35,7 +35,7 @@ public class MedicoServicioImpl implements MedicoServicio {
             throw new Exception("No existe un medico con el código " + codigoMedico);
         }
 
-        if (medicoIsActive(codigoMedico) == null) {
+        if (medicoItsActive(codigoMedico) == null) {
             throw new Exception("El medico no se encuentra " + codigoMedico);
         }
 
@@ -52,6 +52,11 @@ public class MedicoServicioImpl implements MedicoServicio {
         }
 
         return listaItemConsultaDTOS;
+    }
+
+    @Override
+    public int atenderCita(RegistroAtencionDTO registroAtencionDTO) throws Exception {
+        return 0;
     }
 
     @Override
@@ -80,7 +85,7 @@ public class MedicoServicioImpl implements MedicoServicio {
             throw new Exception("No existe un medico con el código " + codigoMedico);
         }
 
-        if (medicoIsActive(codigoMedico) == null) {
+        if (medicoItsActive(codigoMedico) == null) {
             throw new Exception("El medico no se encuentra " + codigoMedico);
         }
 
@@ -107,14 +112,14 @@ public class MedicoServicioImpl implements MedicoServicio {
             throw new Exception("No existe un medico con el código " + codigoMedico);
         }
 
-        if (medicoIsActive(codigoMedico) == null) {
+        if (medicoItsActive(codigoMedico) == null) {
             throw new Exception("El medico no se encuentra " + codigoMedico);
         }
 
         ArrayList<ItemConsultaDTO> listaCitasMedico = new ArrayList<>();
         for (Cita c : medicoRepo.listasCitas(codigoMedico)) {
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
-                    c.getMedico().getCodigo(),
+                    c.getCodigo(),
                     c.getPaciente().getCedula(),
                     c.getPaciente().getNombre(),
                     c.getFechaCita(),
@@ -126,8 +131,8 @@ public class MedicoServicioImpl implements MedicoServicio {
         return listaCitasMedico;
     }
 
-    private Medico medicoIsActive(int codigoMedico) {
-        return medicoRepo.isActive(codigoMedico);
+    private Medico medicoItsActive(int codigoMedico) {
+        return medicoRepo.findActivo(codigoMedico);
     }
 
     private Optional<Medico> medicoExiste(int codigoMedico) {

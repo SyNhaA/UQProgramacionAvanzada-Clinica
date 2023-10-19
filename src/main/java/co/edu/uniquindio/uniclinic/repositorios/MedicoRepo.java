@@ -2,6 +2,7 @@ package co.edu.uniquindio.uniclinic.repositorios;
 
 import co.edu.uniquindio.uniclinic.modelo.entidades.Cita;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
+import co.edu.uniquindio.uniclinic.modelo.enums.EstadoUsuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,8 +20,10 @@ public interface MedicoRepo extends JpaRepository<Medico, Integer> {
 
     Medico findByCorreoAndCodigoNot(String correo, int codigo);
 
+    List<Medico> findAllByEstado(EstadoUsuario estado);
+
     @Query("select m from Medico m where m.codigo = :codigoMedico and m.estado =  'ACTIVO'")
-    Medico isActive(int codigoMedico);
+    Medico findActivo(int codigoMedico);
 
     @Query("select c from Medico m join m.citas c where m.codigo = :codigoMedico and c.fechaCita > CURRENT_DATE")
     List<Cita> listarCitasPendiente(int codigoMedico);

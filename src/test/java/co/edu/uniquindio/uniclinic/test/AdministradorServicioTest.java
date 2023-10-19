@@ -1,8 +1,12 @@
 package co.edu.uniquindio.uniclinic.test;
 
+import co.edu.uniquindio.uniclinic.dto.admin.InfoMedicoDTO;
+import co.edu.uniquindio.uniclinic.dto.admin.ItemConsultaDTO;
+import co.edu.uniquindio.uniclinic.dto.admin.ItemMedicoDTO;
 import co.edu.uniquindio.uniclinic.dto.admin.RegistroMedicoDTO;
 import co.edu.uniquindio.uniclinic.dto.medico.HorarioDTO;
 import co.edu.uniquindio.uniclinic.excepciones.ResourceAlreadyExistsException;
+import co.edu.uniquindio.uniclinic.excepciones.ResourceNotFoundException;
 import co.edu.uniquindio.uniclinic.modelo.enums.Ciudad;
 import co.edu.uniquindio.uniclinic.modelo.enums.Dia;
 import co.edu.uniquindio.uniclinic.modelo.enums.Especialidad;
@@ -27,7 +31,7 @@ public class AdministradorServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void crearMedicoTest() {
+    public void crearMedicoTest() throws ResourceAlreadyExistsException {
         List<HorarioDTO> horarios = new ArrayList<>();
         horarios.add(new HorarioDTO(Dia.LUNES, LocalTime.of(7, 0, 0),
                 LocalTime.of(14, 0, 0)));
@@ -44,14 +48,71 @@ public class AdministradorServicioTest {
                 horarios
         );
 
-        int nuevo = 0;
-        try {
-            nuevo = administradorServicio.crearMedico(medicoDTO);
-        } catch (ResourceAlreadyExistsException e) {
-            throw new RuntimeException(e);
-        }
+        int nuevo = administradorServicio.crearMedico(medicoDTO);
 
         Assertions.assertNotEquals(0, nuevo);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarMedicoTest() throws ResourceNotFoundException, ResourceAlreadyExistsException {
+        InfoMedicoDTO guardado = administradorServicio.obtenerMedico(1);
+
+        InfoMedicoDTO modificado = new InfoMedicoDTO(
+                guardado.codigo(),
+                guardado.nombre(),
+                "andres@email.com",
+                guardado.cedula(),
+                guardado.telefono(),
+                guardado.ciudad(),
+                guardado.especialidad(),
+                guardado.urlFoto(),
+                guardado.horarios()
+        );
+
+        administradorServicio.actualizarMedico(modificado);
+
+        InfoMedicoDTO actualizado = administradorServicio.obtenerMedico(1);
+
+        Assertions.assertNotEquals(guardado.correo(), actualizado.correo());
+        Assertions.assertEquals(modificado.correo(), actualizado.correo());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarMedicoTest() throws ResourceNotFoundException {
+        administradorServicio.eliminarMedico(2);
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            administradorServicio.obtenerMedico(2);
+        });
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarMedicosTest() throws ResourceNotFoundException {
+        List<ItemMedicoDTO> medicos = administradorServicio.listarMedicos();
+        medicos.forEach(System.out::println);
+
+        Assertions.assertEquals(10, medicos.size());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerMedicoTest() throws ResourceNotFoundException {
+        InfoMedicoDTO medico = administradorServicio.obtenerMedico(1);
+        System.out.println(medico);
+
+        Assertions.assertEquals(1, medico.codigo());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarConsultasMedicoTest() throws ResourceNotFoundException {
+        List<ItemConsultaDTO> consultas = administradorServicio.listarConsultasMedico(3);
+        consultas.forEach(System.out::println);
+
+        Assertions.assertEquals(2, consultas.size());
     }
 
 }

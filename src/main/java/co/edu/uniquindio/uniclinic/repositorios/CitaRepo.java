@@ -11,6 +11,6 @@ import java.util.List;
 public interface CitaRepo extends JpaRepository<Cita, Integer> {
 
     @Query("select c from Cita c where c.medico.codigo = :codigoMedico and c.estado = 'COMPLETADA'")
-    List<Cita> findCitasCompletadasByMedico(int codigoMedico);
+    List<Cita> findCitasCompletadasMedico(int codigoMedico);
 
 }

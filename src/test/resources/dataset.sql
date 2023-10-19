@@ -50,12 +50,12 @@ insert into medico values(10, 0, '6789012345', '555-012', 'Dra. Gonzalez', 'http
 insert into cita values(1, 3, 8, '2023-10-06 09:30:00', '2023-10-05 08:00:00', 'Consulta médica', 'COMPLETADA');
 insert into cita values(2, 6, 1, '2023-10-06 11:15:00', '2023-10-05 09:20:00', 'Examen de rutina', 'COMPLETADA');
 insert into cita values(3, 9, 4, '2023-10-06 13:00:00', '2023-10-05 10:45:00', 'Control de medicación', 'CANCELADA');
-insert into cita values(4, 2, 7, '2023-10-06 15:45:00', '2023-10-05 12:30:00', 'Seguimiento postoperatorio', 'CANCELADA');
+insert into cita values(4, 3, 7, '2023-10-06 15:45:00', '2023-10-05 12:30:00', 'Seguimiento postoperatorio', 'CANCELADA');
 insert into cita values(5, 5, 10, '2023-10-06 17:30:00', '2023-10-05 14:15:00', 'Evaluación dental', 'CANCELADA');
 insert into cita values(6, 8, 2, '2023-10-06 09:00:00', '2023-10-05 15:05:00', 'Terapia física', 'CANCELADA');
 insert into cita values(7, 10, 5, '2023-10-06 11:30:00', '2023-10-05 16:40:00', 'Consulta psicológica', 'COMPLETADA');
 insert into cita values(8, 4, 9, '2023-10-06 14:15:00', '2023-10-05 17:55:00', 'Control de embarazo', 'CANCELADA');
-insert into cita values(9, 1, 3, '2023-10-06 16:00:00', '2023-10-05 19:20:00', 'Chequeo de laboratorio', 'COMPLETADA');
+insert into cita values(9, 3, 3, '2023-10-06 16:00:00', '2023-10-05 19:20:00', 'Chequeo de laboratorio', 'COMPLETADA');
 insert into cita values(10, 7, 6, '2023-10-06 18:45:00', '2023-10-05 20:10:00', 'Consulta de alergias', 'CANCELADA');
 
 -- Registros para la entidad "pqrs"

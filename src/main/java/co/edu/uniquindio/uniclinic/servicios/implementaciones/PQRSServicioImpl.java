@@ -63,7 +63,7 @@ public class PQRSServicioImpl implements PQRSServicio {
             throw new Exception("No hay pacientes registrados con ese codigo");
         }
         List<Pqrs> listaPqrs = pqrsRepo.listarPqrsPendiente(codigoPaciente);
-        if (listaPqrs.size() == 0){
+        if (listaPqrs.isEmpty()){
             throw new Exception("EL paciente no tiene pqrs registradas");
         }
         return listaPqrs.stream().map(pq -> new ItemPQRSPacienteDTO(

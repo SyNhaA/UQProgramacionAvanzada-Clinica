@@ -58,7 +58,7 @@ public class AdministradorServicioImpl implements AdministradorServicio {
             ResourceAlreadyExistsException {
         Optional<Medico> opcional = medicoRepo.findById(medicoDTO.codigo());
 
-        if (opcional.isEmpty()) {
+        if (opcional.isEmpty() || estaMedicoActivo(opcional.get())) {
             throw new ResourceNotFoundException("No existe un médico con el código " + medicoDTO.codigo());
         }
 
@@ -179,7 +179,7 @@ public class AdministradorServicioImpl implements AdministradorServicio {
     public void eliminarMedico(int codigo) throws ResourceNotFoundException {
         Optional<Medico> opcional = medicoRepo.findById(codigo);
 
-        if(opcional.isEmpty()) {
+        if(opcional.isEmpty() || estaMedicoActivo(opcional.get())) {
             throw new ResourceNotFoundException("No existe un médico con el código " + codigo);
         }
 
@@ -191,7 +191,7 @@ public class AdministradorServicioImpl implements AdministradorServicio {
 
     @Override
     public List<ItemMedicoDTO> listarMedicos() throws ResourceNotFoundException {
-        List<Medico> medicos = medicoRepo.findAll();
+        List<Medico> medicos = medicoRepo.findAllByEstado(EstadoUsuario.ACTIVO);
 
         if(medicos.isEmpty()) {
             throw new ResourceNotFoundException("No hay médicos registrados");
@@ -210,8 +210,8 @@ public class AdministradorServicioImpl implements AdministradorServicio {
     public InfoMedicoDTO obtenerMedico(int codigo) throws ResourceNotFoundException {
         Optional<Medico> opcional = medicoRepo.findById(codigo);
 
-        if(opcional.isEmpty()) {
-            throw new ResourceNotFoundException("No existe un médico con el código "+codigo);
+        if(opcional.isEmpty() || estaMedicoActivo(opcional.get())) {
+            throw new ResourceNotFoundException("No existe un médico con el código " + codigo);
         }
 
         Medico buscado = opcional.get();
@@ -240,13 +240,17 @@ public class AdministradorServicioImpl implements AdministradorServicio {
         );
     }
 
+    private boolean estaMedicoActivo(Medico medico) {
+        return medico.getEstado() != EstadoUsuario.ACTIVO;
+    }
+
     @Override
     public List<ItemConsultaDTO> listarConsultasMedico(int codigoMedico) throws ResourceNotFoundException {
-        List<Cita> citas = citaRepo.findCitasCompletadasByMedico(codigoMedico);
+        List<Cita> citas = citaRepo.findCitasCompletadasMedico(codigoMedico);
         List<ItemConsultaDTO> respuesta = new ArrayList<>();
 
         if(citas.isEmpty()) {
-            throw new ResourceNotFoundException("No se han encontrado citas creadas");
+            throw new ResourceNotFoundException("No se han encontrado consultas realizadas por este médico");
         }
 
         for(Cita c : citas) {
