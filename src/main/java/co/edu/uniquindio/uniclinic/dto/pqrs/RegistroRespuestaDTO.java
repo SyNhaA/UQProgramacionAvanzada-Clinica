@@ -12,7 +12,6 @@ public record RegistroRespuestaDTO(
         @NotNull
         @Positive
         int codigoCuenta,
-        @NotNull
         @Positive
         int codigoMensaje,
         @NotBlank(message = "El mensaje es obligatorio")

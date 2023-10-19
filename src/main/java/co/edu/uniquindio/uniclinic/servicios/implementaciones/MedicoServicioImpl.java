@@ -26,7 +26,6 @@ public class MedicoServicioImpl implements MedicoServicio {
     private final MedicoRepo medicoRepo;
     private final PacienteRepo pacienteRepo;
     private final PacienteServicioImpl pacienteServicio;
-
     private final DiaLibreRepo diaLibreRepo;
 
 
@@ -53,11 +52,6 @@ public class MedicoServicioImpl implements MedicoServicio {
         }
 
         return listaItemConsultaDTOS;
-    }
-
-    @Override
-    public int atenderCita(RegistroAtencionDTO registroAtencionDTO) throws Exception {
-        return 0;
     }
 
     @Override
@@ -93,7 +87,7 @@ public class MedicoServicioImpl implements MedicoServicio {
         Optional<Medico> medico = medicoRepo.findById(codigoMedico);
         DiaLibre diaLibre = new DiaLibre();
         if (medico.isPresent()) {
-            diaLibre.setDia(diaLibreDTO.dia());
+            diaLibre.setFecha(diaLibreDTO.fecha());
             diaLibre.setMedico(medico.get());
         }
 

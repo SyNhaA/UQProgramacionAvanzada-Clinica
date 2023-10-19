@@ -147,16 +147,16 @@ public class PQRSServicioImpl implements PQRSServicio {
 
         Optional<Mensaje> opcionalMensaje = mensajeRepo.findById(registroRespuestaDTO.codigoMensaje());
 
-        if (opcionalMensaje.isEmpty()) {
-            throw new Exception("No existe un mensaje con el código " + registroRespuestaDTO.codigoMensaje());
-        }
-
         Mensaje mensajeNuevo = new Mensaje();
         mensajeNuevo.setPqrs(opcionalPQRS.get());
         mensajeNuevo.setFechaCreacion(LocalDateTime.now());
         mensajeNuevo.setCuenta(opcionalCuenta.get());
         mensajeNuevo.setMensaje(registroRespuestaDTO.mensaje());
-        mensajeNuevo.setMensajePadre(opcionalMensaje.get());
+        if (opcionalMensaje.isEmpty()) {
+            mensajeNuevo.setMensajePadre(null);
+        } else {
+            mensajeNuevo.setMensajePadre(opcionalMensaje.get());
+        }
 
         Mensaje respuesta = mensajeRepo.save(mensajeNuevo);
 

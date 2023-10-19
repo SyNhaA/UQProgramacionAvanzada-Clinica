@@ -20,7 +20,7 @@ public class DiaLibre implements Serializable {
     private int codigo;
 
     @Column(nullable = false)
-    private LocalDate dia;
+    private LocalDate fecha;
 
     @ManyToOne
     @JoinColumn(name = "medico_codigo", nullable = false)
