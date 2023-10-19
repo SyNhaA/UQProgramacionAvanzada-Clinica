@@ -56,7 +56,7 @@ public class AdministradorServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarMedicoTest() throws ResourceNotFoundException, ResourceAlreadyExistsException {
-        InfoMedicoDTO guardado = administradorServicio.obtenerMedico(1);
+        InfoMedicoDTO guardado = administradorServicio.obtenerMedico(11);
 
         InfoMedicoDTO modificado = new InfoMedicoDTO(
                 guardado.codigo(),
@@ -72,7 +72,7 @@ public class AdministradorServicioTest {
 
         administradorServicio.actualizarMedico(modificado);
 
-        InfoMedicoDTO actualizado = administradorServicio.obtenerMedico(1);
+        InfoMedicoDTO actualizado = administradorServicio.obtenerMedico(11);
 
         Assertions.assertNotEquals(guardado.correo(), actualizado.correo());
         Assertions.assertEquals(modificado.correo(), actualizado.correo());
@@ -81,10 +81,10 @@ public class AdministradorServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminarMedicoTest() throws ResourceNotFoundException {
-        administradorServicio.eliminarMedico(2);
+        administradorServicio.eliminarMedico(12);
 
         Assertions.assertThrows(ResourceNotFoundException.class, () -> {
-            administradorServicio.obtenerMedico(2);
+            administradorServicio.obtenerMedico(12);
         });
     }
 
@@ -100,16 +100,16 @@ public class AdministradorServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void obtenerMedicoTest() throws ResourceNotFoundException {
-        InfoMedicoDTO medico = administradorServicio.obtenerMedico(1);
+        InfoMedicoDTO medico = administradorServicio.obtenerMedico(11);
         System.out.println(medico);
 
-        Assertions.assertEquals(1, medico.codigo());
+        Assertions.assertEquals(11, medico.codigo());
     }
 
     @Test
     @Sql("classpath:dataset.sql")
     public void listarConsultasMedicoTest() throws ResourceNotFoundException {
-        List<ItemConsultaDTO> consultas = administradorServicio.listarConsultasMedico(3);
+        List<ItemConsultaDTO> consultas = administradorServicio.listarConsultasMedico(13);
         consultas.forEach(System.out::println);
 
         Assertions.assertEquals(2, consultas.size());

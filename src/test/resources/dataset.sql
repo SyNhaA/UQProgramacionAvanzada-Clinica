@@ -1,32 +1,33 @@
 -- Registros para la entidad "cuenta"
--- CODIGO | CONTRASEÑA | CORREO
-insert into cuenta values(1, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'pepito@email.com');
-insert into cuenta values(2, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'juanita@email.com');
-insert into cuenta values(3, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'carlos@email.com');
-insert into cuenta values(4, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'laura@email.com');
-insert into cuenta values(5, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'roberto@email.com');
-insert into cuenta values(6, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'ana@email.com');
-insert into cuenta values(7, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'maria@email.com');
-insert into cuenta values(8, '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu', 'pedro@email.com');
-insert into cuenta values(9, 'contraseña9', 'sara@email.com');
-insert into cuenta values(10, 'contraseña10', 'david@email.com');
-
-insert into cuenta values(11, 'contraseña1', 'pepito1@email.com');
-insert into cuenta values(12, 'contraseña2', 'juanita1@email.com');
-insert into cuenta values(13, 'contraseña3', 'carlos1@email.com');
-insert into cuenta values(14, 'contraseña4', 'laura1@email.com');
-insert into cuenta values(15, 'contraseña5', 'roberto1@email.com');
-insert into cuenta values(16, 'contraseña6', 'ana1@email.com');
-insert into cuenta values(17, 'contraseña7', 'maria1@email.com');
-insert into cuenta values(18, 'contraseña8', 'pedro1@email.com');
-insert into cuenta values(19, 'contraseña9', 'sara1@email.com');
-insert into cuenta values(20, 'contraseña10', 'david1@email.com');
-
-insert into cuenta values(21, 'contraseña10', 'david2@email.com');
-insert into cuenta values(22, 'contraseña10', 'david3@email.com');
-insert into cuenta values(23, 'contraseña10', 'david4@email.com');
-insert into cuenta values(24, 'contraseña10', 'david5@email.com');
-insert into cuenta values(25, 'contraseña10', 'david6@email.com');
+-- CODIGO | CORREO | CONTRASEÑA
+-- Cuentas para los pacientes
+insert into cuenta values(1, 'pepito@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(2, 'juanita@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(3, 'carlos@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(4, 'laura@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(5, 'roberto@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(6, 'ana@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(7, 'maria@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(8, 'pedro@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(9, 'sara@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(10, 'david@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+-- Cuentas para los médicos
+insert into cuenta values(11, 'pepito1@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(12, 'juanita1@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(13, 'carlos1@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(14, 'laura1@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(15, 'roberto1@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(16, 'ana1@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(17, 'maria1@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(18, 'pedro1@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(19, 'sara1@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(20, 'david1@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+-- Cuentas para los administradores
+insert into cuenta values(21, 'david2@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(22, 'sara2@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(23, 'pedro2@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(24, 'maria2@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
+insert into cuenta values(25, 'ana2@email.com', '$2a$10$IGgYslRT4Yf86vwhT4m//uqaF76HY4NbfZqIpWdW.qUx3xmrz.qwu');
 
 -- Registros para la entidad "administrador"
 -- CODIGO

@@ -246,8 +246,13 @@ public class AdministradorServicioImpl implements AdministradorServicio {
 
     @Override
     public List<ItemConsultaDTO> listarConsultasMedico(int codigoMedico) throws ResourceNotFoundException {
+        Optional<Medico> opcional = medicoRepo.findById(codigoMedico);
         List<Cita> citas = citaRepo.findCitasCompletadasByMedico(codigoMedico);
         List<ItemConsultaDTO> respuesta = new ArrayList<>();
+
+        if(opcional.isEmpty() || estaMedicoActivo(opcional.get())) {
+            throw new ResourceNotFoundException("No existe un médico con el código " + codigoMedico);
+        }
 
         if(citas.isEmpty()) {
             throw new ResourceNotFoundException("No se han encontrado consultas realizadas por este médico");
