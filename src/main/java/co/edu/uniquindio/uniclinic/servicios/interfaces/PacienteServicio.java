@@ -12,6 +12,10 @@ public interface PacienteServicio {
 
     void eliminarCuenta(int codigo) throws Exception;
 
+    void enviarLinkRecuperacion(String correo) throws Exception;
+
+    int cambiarPassword(NuevaPasswordDTO nuevaPasswordDTO) throws Exception;
+
     InfoPacienteDTO verDetallePaciente(int codigo) throws Exception;
 
     int agendarCita(RegistroCitaDTO registroCitaDTO) throws Exception;

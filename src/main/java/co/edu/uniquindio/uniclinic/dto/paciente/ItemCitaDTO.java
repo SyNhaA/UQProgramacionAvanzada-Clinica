@@ -10,7 +10,6 @@ public record ItemCitaDTO(
         String nombreMedico,
         Especialidad especialidad,
         LocalDateTime fechaCita,
-        String motivo,
-        EstadoCita estado
+        String motivo
 ) {
 }

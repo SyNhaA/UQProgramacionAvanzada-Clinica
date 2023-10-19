@@ -9,7 +9,6 @@ public record ItemConsultaDTO(
         String cedulaPaciente,
         String nombrePaciente,
         LocalDateTime fechaConsulta,
-        String motivo,
-        EstadoCita estado
+        String motivo
 ) {
 }

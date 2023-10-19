@@ -1,7 +1,6 @@
 package co.edu.uniquindio.uniclinic.servicios.implementaciones;
 
 import co.edu.uniquindio.uniclinic.dto.autenticacion.LoginDTO;
-import co.edu.uniquindio.uniclinic.dto.autenticacion.NuevaPasswordDTO;
 import co.edu.uniquindio.uniclinic.dto.autenticacion.TokenDTO;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Cuenta;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
@@ -61,16 +60,6 @@ public class AutenticacionServicioImpl implements AutenticacionServicio {
         map.put("id", cuenta.getCodigo());
 
         return jwtUtils.generarToken(cuenta.getCorreo(), map);
-    }
-
-    @Override
-    public void enviarLinkRecuperacion(String correo) throws Exception {
-
-    }
-
-    @Override
-    public void cambiarPassword(NuevaPasswordDTO nuevaPasswordDTO) throws Exception {
-
     }
 
 }

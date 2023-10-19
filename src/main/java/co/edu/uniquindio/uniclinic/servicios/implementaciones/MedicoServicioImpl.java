@@ -47,8 +47,7 @@ public class MedicoServicioImpl implements MedicoServicio {
                     c.getPaciente().getCedula(),
                     c.getPaciente().getNombre(),
                     c.getFechaCita(),
-                    c.getMotivo(),
-                    c.getEstado()
+                    c.getMotivo()
             );
             listaItemConsultaDTOS.add(itemConsultaDTO);
         }
@@ -74,8 +73,7 @@ public class MedicoServicioImpl implements MedicoServicio {
                     c.getMedico().getNombre(),
                     c.getMedico().getEspecialidad(),
                     c.getFechaCita(),
-                    c.getMotivo(),
-                    c.getEstado()
+                    c.getMotivo()
             );
             listaItemCitaDTO.add(itemCitaDTO);
         }
@@ -126,8 +124,7 @@ public class MedicoServicioImpl implements MedicoServicio {
                     c.getPaciente().getCedula(),
                     c.getPaciente().getNombre(),
                     c.getFechaCita(),
-                    c.getMotivo(),
-                    c.getEstado()
+                    c.getMotivo()
             );
             listaCitasMedico.add(itemConsultaDTO);
         }

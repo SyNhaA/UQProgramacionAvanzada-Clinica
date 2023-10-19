@@ -31,6 +31,16 @@ public class PacienteServicioImpl implements PacienteServicio {
     }
 
     @Override
+    public void enviarLinkRecuperacion(String correo) throws Exception {
+
+    }
+
+    @Override
+    public int cambiarPassword(NuevaPasswordDTO nuevaPasswordDTO) throws Exception {
+        return 0;
+    }
+
+    @Override
     public InfoPacienteDTO verDetallePaciente(int codigo) throws Exception {
         return null;
     }

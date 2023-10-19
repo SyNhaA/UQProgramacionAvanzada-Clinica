@@ -11,9 +11,13 @@ import java.util.List;
 @Repository
 public interface MedicoRepo extends JpaRepository<Medico, Integer> {
 
+    Medico findByCedula(String cedula);
+
     Medico findByCorreo(String correo);
 
-    Medico findByCedula(String cedula);
+    Medico findByCedulaAndCodigoNot(String cedula, int codigo);
+
+    Medico findByCorreoAndCodigoNot(String correo, int codigo);
 
     @Query("select m from Medico m where m.codigo = :codigoMedico and m.estado =  'ACTIVO'")
     Medico isActive(int codigoMedico);
