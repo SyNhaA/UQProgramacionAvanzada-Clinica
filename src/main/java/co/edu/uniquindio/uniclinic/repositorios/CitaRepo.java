@@ -13,4 +13,10 @@ public interface CitaRepo extends JpaRepository<Cita, Integer> {
     @Query("select c from Cita c where c.medico.codigo = :codigoMedico and c.estado = 'COMPLETADA'")
     List<Cita> findCitasCompletadasByMedico(int codigoMedico);
 
+    @Query("select c from Cita c where c.medico.codigo = :codigoMedico and c.estado = 'PENDIENTE'")
+    List<Cita> findCitasPendientesByMedico(int codigoMedico);
+
+    @Query("select c from Cita c where c.paciente.codigo = :codigoPaciente and c.estado = 'COMPLETADA'")
+    List<Cita> findCitasCompletadasByPaciente(int codigoPaciente);
+
 }

@@ -240,10 +240,6 @@ public class AdministradorServicioImpl implements AdministradorServicio {
         );
     }
 
-    private boolean estaMedicoActivo(Medico medico) {
-        return medico.getEstado() != EstadoUsuario.ACTIVO;
-    }
-
     @Override
     public List<ItemConsultaDTO> listarConsultasMedico(int codigoMedico) throws ResourceNotFoundException {
         Optional<Medico> opcional = medicoRepo.findById(codigoMedico);
@@ -269,6 +265,10 @@ public class AdministradorServicioImpl implements AdministradorServicio {
         }
 
         return respuesta;
+    }
+
+    private boolean estaMedicoActivo(Medico medico) {
+        return medico.getEstado() != EstadoUsuario.ACTIVO;
     }
 
 }
