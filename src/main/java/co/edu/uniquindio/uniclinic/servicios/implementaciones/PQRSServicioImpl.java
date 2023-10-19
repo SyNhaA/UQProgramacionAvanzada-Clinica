@@ -26,7 +26,7 @@ public class PQRSServicioImpl implements PQRSServicio {
     private final CitaRepo citaRepo;
 
     @Override
-    public List<ItemPQRSAdminDTO> listarPQRS() throws Exception {
+    public List<ItemPQRSAdminDTO> listarPQRS() {
         List<Pqrs> listaPqrs = pqrsRepo.findAll();
         List<ItemPQRSAdminDTO> respuesta = new ArrayList<>();
 
@@ -75,7 +75,7 @@ public class PQRSServicioImpl implements PQRSServicio {
     }
 
     @Override
-    public int crearPQRS(RegistroPQRSDTO registroPQRSDTO) throws Exception {
+    public int crearPQRS(RegistroPQRSDTO registroPQRSDTO){
 
         if (registroPQRSDTO.codigoCita() <= 0) {
             throw new IllegalArgumentException("El código de cita debe ser un valor positivo.");
@@ -85,17 +85,17 @@ public class PQRSServicioImpl implements PQRSServicio {
             throw new IllegalArgumentException("El mensaje no puede estar vacío.");
         }
 
-        if (citaRepo.findById(registroPQRSDTO.codigoCita()).isPresent()) {
+        if (citaRepo.findById(registroPQRSDTO.codigoCita()).isEmpty()) {
             throw new IllegalArgumentException("No existe una cita con el codigo enviado");
         }
 
         Pqrs pqrs = new Pqrs();
-        // AGREGAR MENSAJE
+        pqrs.setMotivo(registroPQRSDTO.mensaje());
         pqrs.setFechaCreacion(LocalDateTime.now());
         pqrs.setEstado(EstadoPQRS.EN_PROCESO);
-        pqrs.setCita(citaRepo.getById(registroPQRSDTO.codigoCita()));
+        pqrs.setCita(citaRepo.getReferenceById(registroPQRSDTO.codigoCita()));
 
-        Pqrs guardado = pqrsRepo.save(pqrs);
+        pqrsRepo.save(pqrs);
         return 1;
     }
 

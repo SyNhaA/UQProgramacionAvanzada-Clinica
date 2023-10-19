@@ -6,6 +6,7 @@ import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Cita;
 import co.edu.uniquindio.uniclinic.modelo.entidades.DiaLibre;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
+import co.edu.uniquindio.uniclinic.repositorios.CitaRepo;
 import co.edu.uniquindio.uniclinic.repositorios.DiaLibreRepo;
 import co.edu.uniquindio.uniclinic.repositorios.MedicoRepo;
 import co.edu.uniquindio.uniclinic.repositorios.PacienteRepo;
@@ -27,6 +28,8 @@ public class MedicoServicioImpl implements MedicoServicio {
     private final PacienteServicioImpl pacienteServicio;
     private final DiaLibreRepo diaLibreRepo;
 
+    private final CitaRepo citaRepo;
+
 
     @Override
     public List<ItemConsultaDTO> listarCitasPendientes(int codigoMedico) throws Exception {
@@ -39,7 +42,7 @@ public class MedicoServicioImpl implements MedicoServicio {
         }
 
         List<ItemConsultaDTO> listaItemConsultaDTOS = new ArrayList<>();
-        for (Cita c : medicoRepo.listarCitasPendiente(codigoMedico)) {
+        for (Cita c : citaRepo.findCitasPendientesByMedico(codigoMedico)) {
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
                     c.getCodigo(),
                     c.getPaciente().getCedula(),
@@ -65,7 +68,7 @@ public class MedicoServicioImpl implements MedicoServicio {
         }
 
         List<ItemCitaDTO> listaItemCitaDTO = new ArrayList<>();
-        for (Cita c : pacienteRepo.listarHistorialAtencionesPaciente(codigoPaciente)) {
+        for (Cita c : citaRepo.findCitasCompletadasByPaciente(codigoPaciente)) {
             ItemCitaDTO itemCitaDTO = new ItemCitaDTO(
                     c.getCodigo(),
                     c.getMedico().getNombre(),

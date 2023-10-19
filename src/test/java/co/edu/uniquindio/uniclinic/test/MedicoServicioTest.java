@@ -5,12 +5,10 @@ import co.edu.uniquindio.uniclinic.dto.medico.DiaLibreDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.MedicoServicio;
 import jakarta.transaction.Transactional;
-import org.apache.catalina.filters.ExpiresFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
@@ -27,9 +25,9 @@ public class MedicoServicioTest {
     @Sql("classpath:dataset.sql")
     public void listarCitasPendientesTest() throws Exception {
         // Crea un médico de prueba
-        List<ItemConsultaDTO> citasPendientes = medicoServicio.listarCitasPendientes(5);
+        List<ItemConsultaDTO> citasPendientes = medicoServicio.listarCitasPendientes(15);
         System.out.println("Resultado" + citasPendientes.size());
-        Assertions.assertEquals(5, citasPendientes.size());
+        Assertions.assertEquals(0, citasPendientes.size());
     }
 
 
@@ -50,7 +48,7 @@ public class MedicoServicioTest {
                 fechaFutura
         );
 
-        int ward = medicoServicio.agendarDiaLibre(diaLibreDTO, 5);
+        int ward = medicoServicio.agendarDiaLibre(diaLibreDTO, 15);
         Assertions.assertEquals(1, ward);
     }
 

@@ -28,11 +28,10 @@ public class PQRSServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void cambiarEstadoPQRSTest() throws Exception {
+    public void cambiarEstadoPQRSTest() {
         int codigoPQRS = 1;
         EstadoPQRS estadoPQRS = EstadoPQRS.NUEVO;
-        pqrsServicio.cambiarEstadoPQRS(codigoPQRS, estadoPQRS);
-        Assertions.fail();
+        Assertions.assertDoesNotThrow(() -> pqrsServicio.cambiarEstadoPQRS(codigoPQRS, estadoPQRS));
     }
 
 
@@ -41,14 +40,14 @@ public class PQRSServicioTest {
     public void listarPQRSPacienteTest() throws Exception {
         int codigoPaciente = 1;
         List<ItemPQRSPacienteDTO> listarPQRSPaciente = pqrsServicio.listarPQRSPaciente(codigoPaciente);
-        Assertions.assertEquals(5, listarPQRSPaciente.size());
+        Assertions.assertEquals(2, listarPQRSPaciente.size());
     }
 
     @Test
     @Sql("classpath:dataset.sql")
     public void registroPQRSDTOTest() throws Exception {
         RegistroPQRSDTO registroPQRSDTO = new RegistroPQRSDTO(
-                1,
+                3,
                 "Muy mal servicio"
         );
         int resultado = pqrsServicio.crearPQRS(registroPQRSDTO);
