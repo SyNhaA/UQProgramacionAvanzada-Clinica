@@ -21,8 +21,8 @@ public interface PacienteRepo extends JpaRepository<Paciente, Integer> {
 
     Paciente findByCorreoAndCodigoNot(String correo, int codigo);
 
-    @Query("select p from Paciente p where p.codigo = :codigoPaciente and p.estado =  'ACTIVO'")
-    Paciente isActive(int codigoPaciente);
+    @Query("select p from Paciente p where p.codigo = :codigoPaciente and p.estado = 0")
+    Paciente findPacienteActivo(int codigoPaciente);
 
     @Query("select c from Paciente p join Cita c where p.codigo = :codigoPaciente and c.fechaCita < CURRENT_DATE")
     List<Cita> listarHistorialAtencionesPaciente(int codigoPaciente);

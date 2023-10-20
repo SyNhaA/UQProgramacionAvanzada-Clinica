@@ -4,18 +4,16 @@ import co.edu.uniquindio.uniclinic.dto.autenticacion.NuevaPasswordDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.*;
 import co.edu.uniquindio.uniclinic.excepciones.ResourceAlreadyExistsException;
 import co.edu.uniquindio.uniclinic.excepciones.ResourceNotFoundException;
-import co.edu.uniquindio.uniclinic.modelo.entidades.Cita;
-import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
-import co.edu.uniquindio.uniclinic.modelo.entidades.Paciente;
+import co.edu.uniquindio.uniclinic.modelo.entidades.*;
 import co.edu.uniquindio.uniclinic.modelo.enums.*;
-import co.edu.uniquindio.uniclinic.repositorios.CitaRepo;
-import co.edu.uniquindio.uniclinic.repositorios.PacienteRepo;
+import co.edu.uniquindio.uniclinic.repositorios.*;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.PacienteServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +23,12 @@ import java.util.Optional;
 public class PacienteServicioImpl implements PacienteServicio {
 
     private final PacienteRepo pacienteRepo;
+    private final MedicoRepo medicoRepo;
+    private final HorarioRepo horarioRepo;
     private final CitaRepo citaRepo;
+    private final AtencionRepo atencionRepo;
+    private final RecetaMedicaRepo recetaRepo;
+    private final IncapacidadRepo incapacidadRepo;
 
     @Override
     public int registrarse(RegistroPacienteDTO pacienteDTO) throws ResourceAlreadyExistsException {
@@ -156,8 +159,49 @@ public class PacienteServicioImpl implements PacienteServicio {
     }
 
     @Override
-    public int agendarCita(RegistroCitaDTO registroCitaDTO) throws Exception {
-        return 0;
+    public int agendarCita(RegistroCitaDTO citaDTO) throws ResourceNotFoundException {
+        List<Medico> medicos = medicoRepo.findAllByEstadoAndEspecialidad(EstadoUsuario.ACTIVO, citaDTO.especialidad());
+
+        if(medicos.isEmpty()) {
+            throw new ResourceNotFoundException("No se encontró ningún médico disponible para la especialidad " +
+                    citaDTO.especialidad());
+        }
+
+        Cita cita = new Cita();
+        cita.setFechaCreacion(LocalDateTime.now());
+        cita.setFechaCita(citaDTO.fechaCita());
+        cita.setMedico(obtenerMedicoDisponible(medicos, citaDTO.fechaCita()));
+        cita.setMotivo(citaDTO.motivo());
+        cita.setEstado(EstadoCita.PROGRAMADA);
+
+        Paciente paciente = pacienteRepo.findPacienteActivo(citaDTO.codigoPaciente());
+        cita.setPaciente(paciente);
+
+        if(citaRepo.countCitasPendientesByPaciente(citaDTO.codigoPaciente()) >= 3) {
+            throw new ResourceNotFoundException("El paciente con el código " + citaDTO.codigoPaciente() +
+                    " ya tiene 3 citas pendientes");
+        }
+
+        Cita citaNueva = citaRepo.save(cita);
+
+        return citaNueva.getCodigo();
+    }
+
+    private Medico obtenerMedicoDisponible(List<Medico> medicos, LocalDateTime fechaCita) throws ResourceNotFoundException {
+        for(Medico m : medicos) {
+            List<HorarioMedico> horarios = horarioRepo.findAllByMedicoCodigo(m.getCodigo());
+
+            for(HorarioMedico h : horarios) {
+                if(h.getDia().ordinal() == fechaCita.getDayOfWeek().getValue()) {
+                    if(h.getHoraInicio().isBefore(fechaCita.toLocalTime()) &&
+                            h.getHoraFin().isAfter(fechaCita.toLocalTime())) {
+                        return m;
+                    }
+                }
+            }
+        }
+
+        throw new ResourceNotFoundException("No se encontró ningún médico disponible para la fecha " + fechaCita);
     }
 
     @Override
@@ -193,30 +237,80 @@ public class PacienteServicioImpl implements PacienteServicio {
     }
 
     @Override
-    public DetalleAtencionMedicaDTO verDetalleCita(int codigoCita) throws Exception {
-        return null;
+    public DetalleAtencionMedicaDTO verDetalleCita(int codigoCita) throws ResourceNotFoundException {
+        Optional<AtencionMedica> opcional = atencionRepo.findByCitaCodigo(codigoCita);
+
+        if(opcional.isEmpty()) {
+            throw new ResourceNotFoundException("No se encontró ninguna atención con el código de cita " +
+                    codigoCita);
+        }
+
+        AtencionMedica buscado = opcional.get();
+
+        return new DetalleAtencionMedicaDTO(
+                buscado.getCodigo(),
+                buscado.getCita().getMedico().getNombre(),
+                buscado.getCita().getMedico().getEspecialidad(),
+                buscado.getCita().getFechaCita(),
+                buscado.getCita().getMotivo(),
+                buscado.getCita().getEstado(),
+                buscado.getNotas(),
+                buscado.getDiagnostico(),
+                buscado.getTratamiento()
+        );
     }
 
     @Override
-    public DetalleRecetaDTO verDetalleRecetaMedica(int codigoReceta) throws Exception {
-        return null;
+    public DetalleRecetaDTO verDetalleRecetaMedica(int codigoAtencion) throws ResourceNotFoundException {
+        Optional<RecetaMedica> opcional = recetaRepo.findByAtencionMedicaCodigo(codigoAtencion);
+
+        if(opcional.isEmpty()) {
+            throw new ResourceNotFoundException("No se encontró ninguna receta con el código de atención " +
+                    codigoAtencion);
+        }
+
+        RecetaMedica buscado = opcional.get();
+
+        List<Medicamento> medicamentos = recetaRepo.findMedicamentosByCodigoReceta(buscado.getCodigo());
+        List<MedicamentoDTO> medicamentosDTO = new ArrayList<>();
+
+        for(Medicamento m : medicamentos) {
+            medicamentosDTO.add(new MedicamentoDTO(
+                    m.getNombre(),
+                    m.getCantidad(),
+                    m.getViaAdministracion(),
+                    m.getDosis()
+            ));
+        }
+
+        return new DetalleRecetaDTO(
+                buscado.getAtencionMedica().getCita().getCodigo(),
+                buscado.getDescripcion(),
+                medicamentosDTO
+        );
     }
 
     @Override
-    public DetalleIncapacidadDTO verDetalleIncapacidad(int codigoIncapacidad) throws Exception {
-        return null;
+    public DetalleIncapacidadDTO verDetalleIncapacidad(int codigoAtencion) throws ResourceNotFoundException {
+        Optional<Incapacidad> opcional = incapacidadRepo.findByAtencionMedicaCodigo(codigoAtencion);
+
+        if(opcional.isEmpty()) {
+            throw new ResourceNotFoundException("No se encontró ninguna incapacidad con el código de atención " +
+                    codigoAtencion);
+        }
+
+        Incapacidad buscado = opcional.get();
+
+        return new DetalleIncapacidadDTO(
+                buscado.getAtencionMedica().getCita().getCodigo(),
+                buscado.getMotivo(),
+                buscado.getFechaInicio(),
+                buscado.getFechaFin()
+        );
     }
 
     private boolean estaPacienteActivo(Paciente paciente) {
         return paciente.getEstado() != EstadoUsuario.ACTIVO;
-    }
-
-    public Paciente pacienteIsActive(int codigoPaciente) {
-        return pacienteRepo.isActive(codigoPaciente);
-    }
-
-    public Optional<Paciente> pacienteExiste(int codigoPaciente) {
-        return pacienteRepo.findById(codigoPaciente);
     }
 
 }

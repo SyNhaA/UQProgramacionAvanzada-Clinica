@@ -6,6 +6,7 @@ import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Cita;
 import co.edu.uniquindio.uniclinic.modelo.entidades.DiaLibre;
 import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
+import co.edu.uniquindio.uniclinic.modelo.entidades.Paciente;
 import co.edu.uniquindio.uniclinic.repositorios.DiaLibreRepo;
 import co.edu.uniquindio.uniclinic.repositorios.MedicoRepo;
 import co.edu.uniquindio.uniclinic.repositorios.PacienteRepo;
@@ -24,9 +25,7 @@ public class MedicoServicioImpl implements MedicoServicio {
 
     private final MedicoRepo medicoRepo;
     private final PacienteRepo pacienteRepo;
-    private final PacienteServicioImpl pacienteServicio;
     private final DiaLibreRepo diaLibreRepo;
-
 
     @Override
     public List<ItemConsultaDTO> listarCitasPendientes(int codigoMedico) throws Exception {
@@ -60,7 +59,7 @@ public class MedicoServicioImpl implements MedicoServicio {
 
     @Override
     public List<ItemCitaDTO> listarHistorialAtencionesPaciente(int codigoPaciente) throws Exception {
-        if (pacienteServicio.pacienteExiste(codigoPaciente).isEmpty()) {
+        if (pacienteExiste(codigoPaciente).isEmpty()) {
             throw new Exception("No existe un paciente con ese codigo: " + codigoPaciente);
         }
 
@@ -120,7 +119,7 @@ public class MedicoServicioImpl implements MedicoServicio {
         List<Cita> citas =medicoRepo.listasCitas(codigoMedico);
 
         for (Cita c : citas) {
-            System.out.println("Esl estado es: " + c.getEstado());
+            System.out.println("El estado es: " + c.getEstado());
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
                     c.getCodigo(),
                     c.getPaciente().getCedula(),
@@ -140,6 +139,10 @@ public class MedicoServicioImpl implements MedicoServicio {
 
     private Optional<Medico> medicoExiste(int codigoMedico) {
         return medicoRepo.findById(codigoMedico);
+    }
+
+    private Optional<Paciente> pacienteExiste(int codigoPaciente) {
+        return pacienteRepo.findById(codigoPaciente);
     }
 
 }
