@@ -1,6 +1,7 @@
 package co.edu.uniquindio.uniclinic.test;
 
 import co.edu.uniquindio.uniclinic.dto.autenticacion.LoginDTO;
+import co.edu.uniquindio.uniclinic.dto.autenticacion.NuevaPasswordDTO;
 import co.edu.uniquindio.uniclinic.dto.autenticacion.TokenDTO;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.AutenticacionServicio;
 import jakarta.transaction.Transactional;
@@ -27,7 +28,19 @@ public class AutenticacionServicioTest {
         TokenDTO tokenDTO = autenticacionServicio.login(loginDTO);
 
         Assertions.assertNotNull(tokenDTO);
+    }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    void cambiarContraseña() throws Exception {
+        NuevaPasswordDTO nuevaPasswordDTO = new NuevaPasswordDTO(
+                "pepito@email.com",
+                "hola"
+        );
+
+        int centinela = autenticacionServicio.cambiarPassword(nuevaPasswordDTO);
+
+        Assertions.assertEquals(0, centinela);
     }
 
 }

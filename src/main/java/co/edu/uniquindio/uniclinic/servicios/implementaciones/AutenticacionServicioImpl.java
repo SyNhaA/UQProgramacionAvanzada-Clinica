@@ -70,6 +70,15 @@ public class AutenticacionServicioImpl implements AutenticacionServicio {
 
     @Override
     public int cambiarPassword(NuevaPasswordDTO nuevaPasswordDTO) throws Exception {
+        Optional<Cuenta> cuenta = cuentaRepo.findByCorreo(nuevaPasswordDTO.email());
+        if (cuenta.isEmpty()){
+            throw new Exception("No hay una cuenta registrada con este correo");
+        }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String passwordEncriptada = passwordEncoder.encode(nuevaPasswordDTO.passwordNueva());
+
+        cuenta.get().setContrasenia(passwordEncriptada);
+        cuentaRepo.save(cuenta.get());
         return 0;
     }
 
