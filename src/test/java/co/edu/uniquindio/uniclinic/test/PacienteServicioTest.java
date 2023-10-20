@@ -1,7 +1,6 @@
 package co.edu.uniquindio.uniclinic.test;
 
-import co.edu.uniquindio.uniclinic.dto.paciente.InfoPacienteDTO;
-import co.edu.uniquindio.uniclinic.dto.paciente.RegistroPacienteDTO;
+import co.edu.uniquindio.uniclinic.dto.paciente.*;
 import co.edu.uniquindio.uniclinic.excepciones.ResourceAlreadyExistsException;
 import co.edu.uniquindio.uniclinic.excepciones.ResourceNotFoundException;
 import co.edu.uniquindio.uniclinic.modelo.enums.Ciudad;
@@ -16,6 +15,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -90,6 +90,42 @@ public class PacienteServicioTest {
         System.out.println(paciente);
 
         Assertions.assertEquals(4, paciente.codigo());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarCitasCompletadasPacienteTest() throws ResourceNotFoundException {
+        List<ItemCitaDTO> citas = pacienteServicio.listarCitasCompletadasPaciente(6);
+        citas.forEach(System.out::println);
+
+        Assertions.assertEquals(2, citas.size());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void verDetalleCitaTest() throws ResourceNotFoundException {
+        DetalleAtencionMedicaDTO cita = pacienteServicio.verDetalleCita(1);
+        System.out.println(cita);
+
+        Assertions.assertEquals(4, cita.codigo());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void verDetalleRecetaMedicaTest() throws ResourceNotFoundException {
+        DetalleRecetaDTO receta = pacienteServicio.verDetalleRecetaMedica(1);
+        System.out.println(receta);
+
+        Assertions.assertEquals(3, receta.codigoCita());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void verDetalleIncapacidadTest() throws ResourceNotFoundException {
+        DetalleIncapacidadDTO incapacidad = pacienteServicio.verDetalleIncapacidad(1);
+        System.out.println(incapacidad);
+
+        Assertions.assertEquals(3, incapacidad.codigoCita());
     }
 
 }
