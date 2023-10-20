@@ -28,9 +28,6 @@ public interface MedicoRepo extends JpaRepository<Medico, Integer> {
     @Query("select m from Medico m where m.codigo = :codigoMedico and m.estado = 0")
     Medico findActivo(int codigoMedico);
 
-    @Query("select c from Medico m join m.citas c where m.codigo = :codigoMedico and c.fechaCita > CURRENT_DATE")
-    List<Cita> listarCitasPendiente(int codigoMedico);
-
     @Query("select c from Cita c where c.medico.codigo = :codigoMedico")
     List<Cita> listasCitas(int codigoMedico);
 

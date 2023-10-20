@@ -22,5 +22,4 @@ public interface MedicoServicio {
 
     MedicamentoDTO obtenerMedicamento(int codigoMedicamento) throws Exception;
 
-
 }
