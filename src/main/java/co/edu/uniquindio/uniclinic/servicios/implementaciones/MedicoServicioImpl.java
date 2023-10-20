@@ -4,6 +4,13 @@ import co.edu.uniquindio.uniclinic.dto.admin.ItemConsultaDTO;
 import co.edu.uniquindio.uniclinic.dto.medico.DiaLibreDTO;
 import co.edu.uniquindio.uniclinic.dto.medico.RegistroAtencionDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
+import co.edu.uniquindio.uniclinic.modelo.entidades.Cita;
+import co.edu.uniquindio.uniclinic.modelo.entidades.DiaLibre;
+import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
+import co.edu.uniquindio.uniclinic.modelo.entidades.Paciente;
+import co.edu.uniquindio.uniclinic.repositorios.DiaLibreRepo;
+import co.edu.uniquindio.uniclinic.repositorios.MedicoRepo;
+import co.edu.uniquindio.uniclinic.repositorios.PacienteRepo;
 import co.edu.uniquindio.uniclinic.dto.paciente.MedicamentoDTO;
 import co.edu.uniquindio.uniclinic.modelo.entidades.*;
 import co.edu.uniquindio.uniclinic.repositorios.*;
@@ -22,14 +29,10 @@ public class MedicoServicioImpl implements MedicoServicio {
 
     private final MedicoRepo medicoRepo;
     private final PacienteRepo pacienteRepo;
-    private final PacienteServicioImpl pacienteServicio;
     private final DiaLibreRepo diaLibreRepo;
-
     private final CitaRepo citaRepo;
     private final MedicamentoRepo medicamentoRepo;
-
     private final AtencionRepo atencionMedicaRepo;
-
 
     @Override
     public List<ItemConsultaDTO> listarCitasPendientes(int codigoMedico) throws Exception {
@@ -129,7 +132,7 @@ public class MedicoServicioImpl implements MedicoServicio {
 
     @Override
     public List<ItemCitaDTO> listarHistorialAtencionesPaciente(int codigoPaciente) throws Exception {
-        if (pacienteServicio.pacienteExiste(codigoPaciente).isEmpty()) {
+        if (pacienteExiste(codigoPaciente).isEmpty()) {
             throw new Exception("No existe un paciente con ese codigo: " + codigoPaciente);
         }
 
@@ -189,7 +192,7 @@ public class MedicoServicioImpl implements MedicoServicio {
         List<Cita> citas =medicoRepo.listasCitas(codigoMedico);
 
         for (Cita c : citas) {
-            System.out.println("Esl estado es: " + c.getEstado());
+            System.out.println("El estado es: " + c.getEstado());
             ItemConsultaDTO itemConsultaDTO = new ItemConsultaDTO(
                     c.getCodigo(),
                     c.getPaciente().getCedula(),
@@ -211,6 +214,9 @@ public class MedicoServicioImpl implements MedicoServicio {
         return medicoRepo.findById(codigoMedico);
     }
 
+    private Optional<Paciente> pacienteExiste(int codigoPaciente) {
+        return pacienteRepo.findById(codigoPaciente);
+    }
 
     public MedicamentoDTO obtenerMedicamento(int codigoMedicamento) throws Exception {
         Optional<Medicamento> medicamento = medicamentoRepo.findById(codigoMedicamento);
@@ -226,4 +232,5 @@ public class MedicoServicioImpl implements MedicoServicio {
 
         return medicamentoDTO;
     }
+
 }
