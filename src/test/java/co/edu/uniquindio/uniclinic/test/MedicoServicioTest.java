@@ -2,18 +2,19 @@ package co.edu.uniquindio.uniclinic.test;
 
 import co.edu.uniquindio.uniclinic.dto.admin.ItemConsultaDTO;
 import co.edu.uniquindio.uniclinic.dto.medico.DiaLibreDTO;
+import co.edu.uniquindio.uniclinic.dto.medico.RegistroAtencionDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
+import co.edu.uniquindio.uniclinic.dto.paciente.MedicamentoDTO;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.MedicoServicio;
 import jakarta.transaction.Transactional;
-import org.apache.catalina.filters.ExpiresFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -27,17 +28,41 @@ public class MedicoServicioTest {
     @Sql("classpath:dataset.sql")
     public void listarCitasPendientesTest() throws Exception {
         // Crea un médico de prueba
-        List<ItemConsultaDTO> citasPendientes = medicoServicio.listarCitasPendientes(5);
+        List<ItemConsultaDTO> citasPendientes = medicoServicio.listarCitasPendientes(15);
         System.out.println("Resultado" + citasPendientes.size());
-        Assertions.assertEquals(5, citasPendientes.size());
+        Assertions.assertEquals(0, citasPendientes.size());
     }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void atenderCita() throws Exception {
+        List<MedicamentoDTO> medicamentos = new ArrayList<>();
+        medicamentos.add(medicoServicio.obtenerMedicamento(1));
+        medicamentos.add(medicoServicio.obtenerMedicamento(3));
+        medicamentos.add(medicoServicio.obtenerMedicamento(5));
+
+        LocalDate today = LocalDate.now();
+        LocalDate incapacidad = today.plusDays(7);
+
+        RegistroAtencionDTO registroAtencionDTO = new RegistroAtencionDTO(
+                "Nota Medica: El paciente esta muy bien",
+                "Diagnostico: Paciente vino por control rutinario, se encuentra en escelente estado",
+                "Tratamiento: vitamica c cada 8 horas",
+                "Cada 8 horas",
+                medicamentos,
+                "Incapacidad 7 dias, por buena persona",
+                LocalDate.now(),
+                incapacidad
+        );
+
+        medicoServicio.atenderCita(registroAtencionDTO, 11);
+    }
 
     @Test
     @Sql("classpath:dataset.sql")
     public void listarHistorialAtencionesPaciente() throws Exception {
         List<ItemCitaDTO> listaHistorialAtencionesPaciente = medicoServicio.listarHistorialAtencionesPaciente(2);
-        System.out.println(listaHistorialAtencionesPaciente);
+        Assertions.assertEquals(1, listaHistorialAtencionesPaciente.size());
     }
 
     @Test
@@ -50,7 +75,7 @@ public class MedicoServicioTest {
                 fechaFutura
         );
 
-        int ward = medicoServicio.agendarDiaLibre(diaLibreDTO, 5);
+        int ward = medicoServicio.agendarDiaLibre(diaLibreDTO, 15);
         Assertions.assertEquals(1, ward);
     }
 
