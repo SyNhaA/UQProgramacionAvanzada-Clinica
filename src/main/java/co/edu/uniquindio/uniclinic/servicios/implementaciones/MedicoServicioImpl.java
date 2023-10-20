@@ -2,14 +2,11 @@ package co.edu.uniquindio.uniclinic.servicios.implementaciones;
 
 import co.edu.uniquindio.uniclinic.dto.admin.ItemConsultaDTO;
 import co.edu.uniquindio.uniclinic.dto.medico.DiaLibreDTO;
+import co.edu.uniquindio.uniclinic.dto.medico.RegistroAtencionDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
-import co.edu.uniquindio.uniclinic.modelo.entidades.Cita;
-import co.edu.uniquindio.uniclinic.modelo.entidades.DiaLibre;
-import co.edu.uniquindio.uniclinic.modelo.entidades.Medico;
-import co.edu.uniquindio.uniclinic.repositorios.CitaRepo;
-import co.edu.uniquindio.uniclinic.repositorios.DiaLibreRepo;
-import co.edu.uniquindio.uniclinic.repositorios.MedicoRepo;
-import co.edu.uniquindio.uniclinic.repositorios.PacienteRepo;
+import co.edu.uniquindio.uniclinic.dto.paciente.MedicamentoDTO;
+import co.edu.uniquindio.uniclinic.modelo.entidades.*;
+import co.edu.uniquindio.uniclinic.repositorios.*;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.MedicoServicio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,6 +26,9 @@ public class MedicoServicioImpl implements MedicoServicio {
     private final DiaLibreRepo diaLibreRepo;
 
     private final CitaRepo citaRepo;
+    private final MedicamentoRepo medicamentoRepo;
+
+    private final AtencionRepo atencionMedicaRepo;
 
 
     @Override
@@ -55,11 +55,77 @@ public class MedicoServicioImpl implements MedicoServicio {
 
         return listaItemConsultaDTOS;
     }
-//
-//    @Override
-//    public int atenderCita(RegistroAtencionDTO registroAtencionDTO) throws Exception {
-//        return 0;
-//    }
+
+    @Override
+    public int atenderCita(RegistroAtencionDTO registroAtencionDTO, int codigoCita) throws Exception {
+        if (citaRepo.findById(codigoCita).isEmpty()){
+            throw new Exception("No hay citas registradas con ese codigo");
+        }
+
+        Optional<Cita> cita = citaRepo.findById(codigoCita);
+
+        if (registroAtencionDTO.notasMedicas().isEmpty()){
+            throw new Exception("Por favor añada las notas medicas");
+        }
+
+        if (registroAtencionDTO.diagnostico().isEmpty()){
+            throw new Exception("Por favor añada el diagnostico");
+        }
+
+        if (registroAtencionDTO.tratamiento().isEmpty()){
+            throw new Exception("Por favor añada el tratamienot");
+        }
+
+        if (registroAtencionDTO.descripcionReceta().isEmpty()){
+            throw new Exception("Por favor añada la descripcion de la receta");
+        }
+
+        if (registroAtencionDTO.motivoIncapacidad().isEmpty()){
+            throw new Exception("Por favor añada el motivo de la incapacidad");
+        }
+
+        if (registroAtencionDTO.fechaInicioIncapacidad() == null){
+            throw new Exception("Por favor añada la fecha de inicio de incapacidad");
+        }
+
+        if (registroAtencionDTO.fechaFinIncapacidad() == null){
+            throw new Exception("Por favor añada la fecha de fin de incapacidad");
+        }
+
+        AtencionMedica atencionMedica = new AtencionMedica();
+        atencionMedica.setDiagnostico(registroAtencionDTO.diagnostico());
+        atencionMedica.setTratamiento(registroAtencionDTO.tratamiento());
+        atencionMedica.setNotas(registroAtencionDTO.notasMedicas());
+
+        atencionMedica.setCita(cita.get());
+
+        Incapacidad incapacidad = new Incapacidad();
+        incapacidad.setMotivo(registroAtencionDTO.motivoIncapacidad());
+        incapacidad.setFechaInicio(registroAtencionDTO.fechaInicioIncapacidad());
+        incapacidad.setFechaFin(registroAtencionDTO.fechaFinIncapacidad());
+
+        atencionMedica.setIncapacidad(incapacidad);
+
+        RecetaMedica recetaMedica = new RecetaMedica();
+        recetaMedica.setDescripcion(registroAtencionDTO.descripcionReceta());
+
+        List<Medicamento> medicamentoList = new ArrayList<>();
+        for (MedicamentoDTO medicamentoDTO : registroAtencionDTO.medicamentos()) {
+            Medicamento medicamento = new Medicamento();
+            medicamento.setNombre(medicamentoDTO.nombre());
+            medicamento.setCantidad(medicamentoDTO.cantidad());
+            medicamento.setViaAdministracion(medicamentoDTO.viaAdministracion());
+            medicamento.setDosis(medicamentoDTO.dosis());
+            medicamentoList.add(medicamento);
+        }
+
+        recetaMedica.setMedicamentos(medicamentoList);
+        atencionMedica.setRecetaMedica(recetaMedica);
+        atencionMedicaRepo.save(atencionMedica);
+
+        return 0;
+    }
+
 
     @Override
     public List<ItemCitaDTO> listarHistorialAtencionesPaciente(int codigoPaciente) throws Exception {
@@ -145,4 +211,19 @@ public class MedicoServicioImpl implements MedicoServicio {
         return medicoRepo.findById(codigoMedico);
     }
 
+
+    public MedicamentoDTO obtenerMedicamento(int codigoMedicamento) throws Exception {
+        Optional<Medicamento> medicamento = medicamentoRepo.findById(codigoMedicamento);
+        if (medicamento.isEmpty()){
+            throw new Exception("El medicamento no existe");
+        }
+        MedicamentoDTO medicamentoDTO = new MedicamentoDTO(
+                medicamento.get().getNombre(),
+                medicamento.get().getCantidad(),
+                medicamento.get().getViaAdministracion(),
+                medicamento.get().getDosis()
+        );
+
+        return medicamentoDTO;
+    }
 }
