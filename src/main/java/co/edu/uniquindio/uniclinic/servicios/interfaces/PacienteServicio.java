@@ -1,10 +1,8 @@
 package co.edu.uniquindio.uniclinic.servicios.interfaces;
 
-import co.edu.uniquindio.uniclinic.dto.autenticacion.NuevaPasswordDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.*;
 import co.edu.uniquindio.uniclinic.excepciones.ResourceAlreadyExistsException;
 import co.edu.uniquindio.uniclinic.excepciones.ResourceNotFoundException;
-import co.edu.uniquindio.uniclinic.modelo.enums.Especialidad;
 
 import java.util.List;
 
@@ -23,7 +21,7 @@ public interface PacienteServicio {
 
     List<ItemCitaDTO> listarCitasCompletadasPaciente(int codigoPaciente) throws ResourceNotFoundException;
 
-    void filtrarCitas(FiltroBusquedaCitaDTO filtroBusquedaCitaDTO) throws Exception;
+    List<ItemCitaDTO> filtrarCitas(FiltroBusquedaCitaDTO filtroBusquedaCitaDTO) throws Exception;
 
     DetalleAtencionMedicaDTO verDetalleCita(int codigoCita) throws ResourceNotFoundException;
 

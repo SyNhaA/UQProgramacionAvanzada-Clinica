@@ -1,6 +1,8 @@
 package co.edu.uniquindio.uniclinic.test;
 
+import co.edu.uniquindio.uniclinic.dto.paciente.FiltroBusquedaCitaDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.InfoPacienteDTO;
+import co.edu.uniquindio.uniclinic.dto.paciente.ItemCitaDTO;
 import co.edu.uniquindio.uniclinic.dto.paciente.RegistroPacienteDTO;
 import co.edu.uniquindio.uniclinic.excepciones.ResourceAlreadyExistsException;
 import co.edu.uniquindio.uniclinic.excepciones.ResourceNotFoundException;
@@ -16,6 +18,8 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -90,6 +94,21 @@ public class PacienteServicioTest {
         System.out.println(paciente);
 
         Assertions.assertEquals(4, paciente.codigo());
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void filtrarCitas() throws Exception {
+
+        LocalDateTime fechaYHora = LocalDateTime.of(2023, 10, 6, 11, 15, 0);
+
+        FiltroBusquedaCitaDTO filtroBusquedaCitaDTO =  new FiltroBusquedaCitaDTO(
+                1,
+                "Dr. Rodriguez",
+                fechaYHora
+        );
+        List<ItemCitaDTO> citaDTOList = pacienteServicio.filtrarCitas(filtroBusquedaCitaDTO);
+        Assertions.assertEquals(1, citaDTOList.size());
     }
 
 }
