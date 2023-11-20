@@ -1,26 +1,23 @@
 package co.edu.uniquindio.uniclinic.controladores;
 
 import co.edu.uniquindio.uniclinic.dto.autenticacion.MensajeDTO;
-import co.edu.uniquindio.uniclinic.dto.paciente.InfoPacienteDTO;
-import co.edu.uniquindio.uniclinic.dto.paciente.RegistroPacienteDTO;
+import co.edu.uniquindio.uniclinic.dto.paciente.*;
 import co.edu.uniquindio.uniclinic.servicios.interfaces.PacienteServicio;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/pacientes")
+@SecurityRequirement(name = "bearerAuth")
 public class PacienteController {
 
     private final PacienteServicio pacienteServicio;
-
-    @PostMapping("/registrarse")
-    public ResponseEntity<MensajeDTO<String>> registrarse(@Valid @RequestBody RegistroPacienteDTO pacienteDTO) throws Exception {
-        pacienteServicio.registrarse(pacienteDTO);
-        return ResponseEntity.ok().body(new MensajeDTO<>(false, "Paciente registrado correctamente"));
-    }
 
     @GetMapping("/detalle/{codigo}")
     public ResponseEntity<MensajeDTO<InfoPacienteDTO>> verDetallePaciente(@PathVariable int codigo) throws Exception {
@@ -37,5 +34,34 @@ public class PacienteController {
         pacienteServicio.eliminarCuenta(codigo);
     }
 
+    @PostMapping("/agendarcita")
+    public ResponseEntity<MensajeDTO<String>> agendarCita(@Valid @RequestBody RegistroCitaDTO citaDTO) throws Exception {
+        pacienteServicio.agendarCita(citaDTO);
+        return ResponseEntity.ok().body(new MensajeDTO<>(false, "Cita agendada correctamente"));
+    }
 
+    @GetMapping("/listarcitascompletadas/{codigo}")
+    public ResponseEntity<MensajeDTO<List<ItemCitaDTO>>> listarCitasCompletadas(@PathVariable int codigo) throws Exception {
+        return ResponseEntity.ok().body(new MensajeDTO<>(false, pacienteServicio.listarCitasCompletadasPaciente(codigo)));
+    }
+
+    @GetMapping("/filtrarcitas")
+    public ResponseEntity<MensajeDTO<List<ItemCitaDTO>>> filtrarcitas(@Valid @RequestBody FiltroBusquedaCitaDTO filtroBusquedaCitaDTO) throws Exception {
+        return ResponseEntity.ok().body(new MensajeDTO<>(false, pacienteServicio.filtrarCitas(filtroBusquedaCitaDTO)));
+    }
+
+    @GetMapping("/detallecita/{codigo}")
+    public ResponseEntity<MensajeDTO<DetalleAtencionMedicaDTO>> detalleCita(@PathVariable int codigo) throws Exception {
+        return ResponseEntity.ok().body(new MensajeDTO<>(false, pacienteServicio.verDetalleCita(codigo)));
+    }
+
+    @GetMapping("/detallecitarecetamedica/{codigo}")
+    public ResponseEntity<MensajeDTO<DetalleRecetaDTO>> detalleRecetaMedica(@PathVariable int codigo) throws Exception {
+        return ResponseEntity.ok().body(new MensajeDTO<>(false, pacienteServicio.verDetalleRecetaMedica(codigo)));
+    }
+
+    @GetMapping("/detalleincapacidad/{codigo}")
+    public ResponseEntity<MensajeDTO<DetalleIncapacidadDTO>> detalleIncapacidad(@PathVariable int codigo) throws Exception {
+        return ResponseEntity.ok().body(new MensajeDTO<>(false, pacienteServicio.verDetalleIncapacidad(codigo)));
+    }
 }

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.uniclinic.controladores.excepciones;
 
 import co.edu.uniquindio.uniclinic.dto.autenticacion.MensajeDTO;
+import co.edu.uniquindio.uniclinic.dto.autenticacion.ValidacionDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestControllerAdvice
 public class ExcepcionesGlobales {
@@ -27,5 +29,4 @@ public class ExcepcionesGlobales {
         }
         return ResponseEntity.badRequest().body( new MensajeDTO<>(true, errores) );
     }
-}
 }

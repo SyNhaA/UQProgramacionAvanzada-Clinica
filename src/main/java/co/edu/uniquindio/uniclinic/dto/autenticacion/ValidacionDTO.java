@@ -1,5 +1,11 @@
 package co.edu.uniquindio.uniclinic.dto.autenticacion;
 
-public record ValidacionDTO() {
+import jakarta.validation.constraints.NotBlank;
 
+public record ValidacionDTO(
+        @NotBlank
+        String field,
+        @NotBlank
+        String defaultMessage
+) {
 }

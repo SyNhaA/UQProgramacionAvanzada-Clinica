@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record InfoPacienteDTO(
-        @NotBlank(message = "El código es obligatorio")
+
         @Positive(message = "El código debe ser mayor a cero")
         int codigo,
         @NotBlank(message = "El nombre es obligatorio")
